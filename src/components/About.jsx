@@ -5,7 +5,7 @@ export default function About() {
   const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: true })
 
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: 1 },
     visible: {
       opacity: 1,
       transition: { staggerChildren: 0.2 },
@@ -13,7 +13,7 @@ export default function About() {
   }
 
   const itemVariants = {
-    hidden: { opacity: 0, x: -50 },
+    hidden: { opacity: 1, x: -50 },
     visible: { opacity: 1, x: 0, transition: { duration: 0.6 } },
   }
 
@@ -21,7 +21,7 @@ export default function About() {
     <section id="about" ref={ref} className="py-20 px-4 sm:px-6 lg:px-8 relative">
       <div className="max-w-6xl mx-auto">
         <motion.h2
-          initial={{ opacity: 0 }}
+          initial={{ opacity: 1 }}
           animate={inView ? { opacity: 1 } : {}}
           className="text-4xl font-bold text-center mb-16"
         >
