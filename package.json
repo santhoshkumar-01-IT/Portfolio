@@ -10,7 +10,7 @@
     "lint": "eslint src --ext js,jsx"
   },
   "dependencies": {
-    "@react-three/drei": "^9.56.0",
+    "@react-three/drei": "^10.7.0",
     "axios": "^1.6.0",
     "emailjs-com": "^3.2.0",
     "framer-motion": "^10.16.4",
