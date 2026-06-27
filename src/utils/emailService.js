@@ -1,9 +1,9 @@
 // Email service integration using EmailJS
 // Sign up at https://www.emailjs.com to get your credentials
 
-const SERVICE_ID = 'YOUR_SERVICE_ID'
-const TEMPLATE_ID = 'YOUR_TEMPLATE_ID'
-const PUBLIC_KEY = 'YOUR_PUBLIC_KEY'
+const SERVICE_ID = 'service_78xzo0a'
+const TEMPLATE_ID = 'template_mxu8616'
+const PUBLIC_KEY = 'jC-UuZl1XWdtvQm83'
 
 export const sendEmail = async (formData) => {
   try {

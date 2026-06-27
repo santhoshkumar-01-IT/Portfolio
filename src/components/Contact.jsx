@@ -48,8 +48,8 @@ export default function Contact() {
               </div>
               <div>
                 <h3 className="font-bold text-white mb-1">Email</h3>
-                <a href="mailto:your@email.com" className="text-gray-400 hover:text-accent-blue transition-colors">
-                  your@email.com
+                <a href="mailto:santhoshkumaroffc@gmail.com" className="text-gray-400 hover:text-accent-blue transition-colors">
+                  santhoshkumaroffc@gmail.com
                 </a>
               </div>
             </div>
@@ -60,8 +60,8 @@ export default function Contact() {
               </div>
               <div>
                 <h3 className="font-bold text-white mb-1">Phone</h3>
-                <a href="tel:+1234567890" className="text-gray-400 hover:text-accent-purple transition-colors">
-                  +1 (234) 567-890
+                <a href="tel:+91 9384767962" className="text-gray-400 hover:text-accent-purple transition-colors">
+                  +91 9384767962
                 </a>
               </div>
             </div>
@@ -71,8 +71,8 @@ export default function Contact() {
                 <FiMapPin className="text-accent-pink" size={24} />
               </div>
               <div>
-                <h3 className="font-bold text-white mb-1">Location</h3>
-                <p className="text-gray-400">Your City, Your Country</p>
+                <h3 className="font-bold text-white mb-1"><Location></Location></h3>
+                <p className="text-gray-400"><Coimbatore></Coimbatore>, <India></India></p>
               </div>
             </div>
           </motion.div>
