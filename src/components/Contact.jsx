@@ -71,8 +71,8 @@ export default function Contact() {
                 <FiMapPin className="text-accent-pink" size={24} />
               </div>
               <div>
-                <h3 className="font-bold text-white mb-1"><Location></Location></h3>
-                <p className="text-gray-400"><Coimbatore></Coimbatore>, <India></India></p>
+                <h3 className="font-bold text-white mb-1">Location</h3>
+                <p className="text-gray-400">Coimbatore, India</p>
               </div>
             </div>
           </motion.div>
