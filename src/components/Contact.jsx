@@ -27,7 +27,7 @@ export default function Contact() {
       <div className="max-w-6xl mx-auto">
         <motion.h2
           initial={{ opacity: 1 }}
-          animate={inView ? { opacity: 1 } : {}}
+          animate={{ opacity: 1, x: 0 }}
           className="text-4xl font-bold text-center mb-16"
         >
           <span className="bg-gradient-to-r from-accent-blue to-accent-purple bg-clip-text text-transparent">
@@ -39,7 +39,7 @@ export default function Contact() {
           {/* Contact Info */}
           <motion.div
             initial={{ opacity: 1, x: -50 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
+            animate={{ opacity: 1, x: 0 }}
             className="space-y-8"
           >
             <div className="flex gap-4">
