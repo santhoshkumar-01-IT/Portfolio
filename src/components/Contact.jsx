@@ -80,7 +80,7 @@ export default function Contact() {
           {/* Contact Form */}
           <motion.form
             initial={{ opacity: 1, x: 50 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
+            animate={{ opacity: 1, x: 0 }}
             onSubmit={handleSubmit}
             className="space-y-4"
           >
