@@ -42,7 +42,7 @@ export default function Skills() {
           animate={inView ? { opacity: 1 } : {}}
           className="text-4xl font-bold text-center mb-16"
         >
-          <span className="bg-gradient-to-r from-accent-blue to-accent-purple bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-accent-blue to-accent-purple bg-clip-text text-transparent inline-block">
             Skills & Expertise
           </span>
         </motion.h2>
