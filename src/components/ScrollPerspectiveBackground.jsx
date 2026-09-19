@@ -25,54 +25,47 @@ export default function ScrollPerspectiveBackground() {
     const render = () => {
       // Smooth lerp scroll position
       currentScrollRef.current += (scrollYRef.current - currentScrollRef.current) * 0.08
-      continuousTime += 0.008 // subtle continuous forward idle drift
+      continuousTime += 0.006 // subtle forward idle drift
 
       ctx.clearRect(0, 0, width, height)
 
-      // 3D Camera & Perspective Parameters
-      const horizonY = height * 0.50 // Horizon where chessboard meets deep black
-      const fovDistance = 450 // Perspective focal length
-      const cameraHeight = 160 // Height of camera above the chessboard floor
-      const tileSize = 120 // Tile width in world units
+      // Perspective horizon parameters
+      const horizonY = height * 0.52 // Horizon starts at ~52% of viewport
+      const floorHeight = height - horizonY + 40 // Cover entire bottom half
+      const tileWidthAtBottom = width / 9.5 // ~9-10 clean chessboard columns across screen
 
-      // Total forward progress in tile units
-      const totalProgress = (currentScrollRef.current * 0.005) + continuousTime
+      // Total forward progress
+      const totalProgress = (currentScrollRef.current * 0.008) + continuousTime
       const offset = totalProgress % 1
       const baseRow = Math.floor(totalProgress)
 
-      const numRows = 45 // Depth rows receding into distance
-      const numCols = 32 // Columns spread across width
+      const numRows = 36 // Depth rows receding towards horizon
+      const numCols = 16 // Columns left and right from center
 
       ctx.save()
 
-      // Render from back (horizon) to front (bottom of screen)
+      // Render from back (horizon) to front (bottom of viewport)
       for (let r = numRows; r >= 1; r--) {
-        const zNear = r - offset
-        const zFar = r + 1 - offset
+        const zNear = (r - offset) * 0.35 + 0.65
+        const zFar = (r + 1 - offset) * 0.35 + 0.65
 
-        if (zNear <= 0.1) continue
+        // Quadratic perspective mapping for natural foreshortened squares
+        const yNear = horizonY + floorHeight / Math.pow(zNear, 1.4)
+        const yFar = horizonY + floorHeight / Math.pow(zFar, 1.4)
 
-        // Perspective Y projection
-        const yNear = horizonY + (cameraHeight * fovDistance) / zNear
-        const yFar = horizonY + (cameraHeight * fovDistance) / zFar
-
-        // Alpha fade into deep darkness towards horizon
-        const depthFactor = Math.min(1, Math.max(0, (numRows - r) / (numRows * 0.75)))
-        const rowAlpha = Math.pow(depthFactor, 1.8)
-
-        if (rowAlpha <= 0.01) continue
+        // Depth alpha fade towards horizon
+        const fade = Math.min(1, Math.max(0, 1 - (r / numRows)))
+        const alpha = Math.pow(fade, 1.1)
 
         for (let c = -numCols; c < numCols; c++) {
-          // Perspective X projection
-          const xNearLeft = width / 2 + ((c * tileSize) * fovDistance) / zNear
-          const xNearRight = width / 2 + (((c + 1) * tileSize) * fovDistance) / zNear
+          const xNearLeft = width / 2 + (c * tileWidthAtBottom) / zNear
+          const xNearRight = width / 2 + ((c + 1) * tileWidthAtBottom) / zNear
 
-          const xFarLeft = width / 2 + ((c * tileSize) * fovDistance) / zFar
-          const xFarRight = width / 2 + (((c + 1) * tileSize) * fovDistance) / zFar
+          const xFarLeft = width / 2 + (c * tileWidthAtBottom) / zFar
+          const xFarRight = width / 2 + ((c + 1) * tileWidthAtBottom) / zFar
 
-          // Determine alternating chessboard pattern
-          // (column index + row index + base row) parity
-          const isWhite = Math.abs((c + r + baseRow) % 2) === 1
+          // Perfect alternating chessboard parity
+          const isWhite = Math.abs((c + r + baseRow) % 2) === 0
 
           ctx.beginPath()
           ctx.moveTo(xNearLeft, yNear)
@@ -82,28 +75,28 @@ export default function ScrollPerspectiveBackground() {
           ctx.closePath()
 
           if (isWhite) {
-            ctx.fillStyle = `rgba(245, 245, 248, ${0.9 * rowAlpha})`
+            ctx.fillStyle = `rgba(245, 245, 248, ${0.92 * alpha})`
           } else {
-            ctx.fillStyle = `rgba(8, 8, 10, ${0.98 * rowAlpha})`
+            ctx.fillStyle = `rgba(8, 8, 10, ${0.98 * alpha})`
           }
           ctx.fill()
 
-          // Crisp tile border grid line
-          ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 * rowAlpha})`
-          ctx.lineWidth = 0.5
+          // Subtle tile grid border
+          ctx.strokeStyle = `rgba(255, 255, 255, ${0.12 * alpha})`
+          ctx.lineWidth = 0.6
           ctx.stroke()
         }
       }
 
-      // Soft fog horizon fade gradient to blend seamlessly into pitch black
-      const fogGradient = ctx.createLinearGradient(0, horizonY - 80, 0, horizonY + 120)
+      // Smooth Horizon Fog Fade into pure black top half
+      const fogGradient = ctx.createLinearGradient(0, horizonY - 40, 0, horizonY + 90)
       fogGradient.addColorStop(0, 'rgba(5, 5, 5, 1)')
       fogGradient.addColorStop(0.4, 'rgba(5, 5, 5, 0.95)')
-      fogGradient.addColorStop(0.8, 'rgba(5, 5, 5, 0.3)')
+      fogGradient.addColorStop(0.75, 'rgba(5, 5, 5, 0.4)')
       fogGradient.addColorStop(1, 'rgba(5, 5, 5, 0)')
 
       ctx.fillStyle = fogGradient
-      ctx.fillRect(0, horizonY - 80, width, 200)
+      ctx.fillRect(0, horizonY - 40, width, 140)
 
       ctx.restore()
 
@@ -128,7 +121,7 @@ export default function ScrollPerspectiveBackground() {
 
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#050505]">
-      {/* Layer 1: Seamless Topographic Contours Texture (Image 2) */}
+      {/* Layer 1: Topographic Contours Texture (Image 2) */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.14] mix-blend-screen pointer-events-none"
         style={{
