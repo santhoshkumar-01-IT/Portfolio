@@ -10,74 +10,85 @@
 
 html {
   scroll-behavior: smooth;
+  color-scheme: dark;
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background-color: #0a0e27;
-  color: #e4e4e7;
+  background-color: #080c14;
+  color: #f1f5f9;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   overflow-x: hidden;
 }
 
-/* Custom scrollbar */
+/* Custom Tech Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a0e27;
+  background: #080c14;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #00d4ff;
-  border-radius: 5px;
+  background: #1e293b;
+  border-radius: 4px;
+  border: 1px solid rgba(56, 189, 248, 0.2);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a78bfa;
+  background: #00f2fe;
 }
 
-/* Selection */
-::selection {
-  background-color: #00d4ff;
-  color: #0a0e27;
+/* Tech Grid Utility */
+.bg-tech-grid {
+  background-size: 30px 30px;
+  background-image: 
+    linear-gradient(to right, rgba(56, 189, 248, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
 }
 
-/* Smooth transitions */
-button, a {
-  transition: all 0.3s ease;
+.bg-tech-dots {
+  background-size: 24px 24px;
+  background-image: radial-gradient(circle, rgba(56, 189, 248, 0.12) 1px, transparent 1px);
 }
 
-/* Focus styles */
-button:focus, a:focus {
-  outline: 2px solid #00d4ff;
-  outline-offset: 2px;
+/* Tech Glass Panels */
+.tech-glass {
+  background: rgba(13, 19, 34, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(56, 189, 248, 0.15);
 }
 
-/* Animation utilities */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Glassmorphism effect */
-.glass {
-  background: rgba(255, 255, 255, 0.1);
+.tech-glass-card {
+  background: rgba(17, 25, 46, 0.6);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(30, 41, 59, 0.8);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tech-glass-card:hover {
+  border-color: rgba(0, 242, 254, 0.4);
+  box-shadow: 0 10px 25px -5px rgba(0, 242, 254, 0.1), 0 8px 10px -6px rgba(99, 102, 241, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Glow Utilities */
+.glow-cyan {
+  box-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
+}
+
+.glow-indigo {
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+}
+
+.glow-emerald {
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+}
+
+/* Code block typography */
+.code-font {
+  font-family: 'JetBrains Mono', monospace;
 }

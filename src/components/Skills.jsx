@@ -1,75 +1,114 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
+import { FiCode, FiServer, FiDatabase, FiCloud, FiTerminal } from 'react-icons/fi'
 
 const skillCategories = [
   {
-    category: 'Frontend',
+    category: 'Frontend Engineering',
+    icon: <FiCode className="text-tech-cyan" />,
+    description: 'Interactive, responsive & performant client interfaces',
     skills: [
-      { name: 'React', level: 90 },
-      { name: 'JavaScript', level: 85 },
-      { name: 'Tailwind CSS', level: 90 },
-      { name: 'Framer Motion', level: 80 },
+      { name: 'React.js / Next.js', level: 90 },
+      { name: 'JavaScript (ES6+) / TypeScript', level: 88 },
+      { name: 'Tailwind CSS / UI Libraries', level: 92 },
+      { name: 'State Management (Redux / Context)', level: 85 },
+      { name: 'HTML5 & Modern CSS3', level: 95 },
     ],
   },
   {
-    category: 'Backend',
+    category: 'Backend & Systems',
+    icon: <FiServer className="text-tech-indigo" />,
+    description: 'RESTful microservices, business logic & auth',
     skills: [
-      { name: 'Node.js', level: 85 },
-      { name: 'Express.js', level: 85 },
-      { name: 'MongoDB', level: 80 },
-      { name: 'PostgreSQL', level: 75 },
+      { name: 'Node.js & Express.js', level: 88 },
+      { name: 'REST API Design & Security', level: 90 },
+      { name: 'JWT & OAuth Authentication', level: 85 },
+      { name: 'Python / Scripting', level: 80 },
+      { name: 'Server-Side Architecture', level: 82 },
     ],
   },
   {
-    category: 'Tools',
+    category: 'Databases & Storage',
+    icon: <FiDatabase className="text-tech-purple" />,
+    description: 'Data modeling, optimization & transactions',
     skills: [
-      { name: 'Git', level: 85 },
-      { name: 'Docker', level: 70 },
-      { name: 'AWS', level: 75 },
-      { name: 'Linux', level: 80 },
+      { name: 'MongoDB / Mongoose', level: 88 },
+      { name: 'PostgreSQL / SQL', level: 82 },
+      { name: 'Redis / In-Memory Caching', level: 75 },
+      { name: 'Schema Design & Indexing', level: 80 },
+    ],
+  },
+  {
+    category: 'DevOps & Tooling',
+    icon: <FiCloud className="text-tech-emerald" />,
+    description: 'Version control, deployment & environments',
+    skills: [
+      { name: 'Git & GitHub Workflow', level: 92 },
+      { name: 'Docker & Containerization', level: 75 },
+      { name: 'Vercel / AWS Cloud Services', level: 80 },
+      { name: 'Linux / Bash Scripting', level: 82 },
     ],
   },
 ]
 
 export default function Skills() {
-  const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: true })
+  const { ref, inView } = useInView({ threshold: 0.15, triggerOnce: true })
 
   return (
-    <section id="skills" ref={ref} className="py-20 px-4 sm:px-6 lg:px-8 bg-dark-card/30">
+    <section id="skills" ref={ref} className="py-24 px-4 sm:px-6 lg:px-8 relative bg-tech-surface/40">
       <div className="max-w-6xl mx-auto">
-        <motion.h2
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          className="text-4xl font-bold text-center mb-16"
-        >
-          <span className="bg-gradient-to-r from-accent-blue to-accent-purple bg-clip-text text-transparent inline-block">
-            Skills & Expertise
+        {/* Section Header */}
+        <div className="text-center mb-16 space-y-2">
+          <span className="text-xs font-mono text-tech-cyan tracking-widest uppercase">
+            // 02. Technical Arsenal
           </span>
-        </motion.h2>
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
+            Skills &{' '}
+            <span className="bg-gradient-to-r from-tech-cyan via-tech-blue to-tech-indigo bg-clip-text text-transparent">
+              Proficiencies
+            </span>
+          </h2>
+          <div className="w-12 h-1 bg-gradient-to-r from-tech-cyan to-tech-indigo mx-auto rounded-full" />
+        </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 gap-8">
           {skillCategories.map((category, idx) => (
             <motion.div
               key={category.category}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 25 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: idx * 0.2 }}
-              className="bg-dark-bg/50 border border-dark-border rounded-xl p-6 backdrop-blur"
+              transition={{ delay: idx * 0.15, duration: 0.6 }}
+              className="tech-glass-card rounded-xl p-6 sm:p-7 relative overflow-hidden"
             >
-              <h3 className="text-xl font-bold mb-6 text-accent-blue">{category.category}</h3>
-              <div className="space-y-4">
+              {/* Category Header */}
+              <div className="flex items-center gap-3 mb-2">
+                <div className="p-2.5 rounded-lg bg-tech-surface border border-tech-border">
+                  {category.icon}
+                </div>
+                <div>
+                  <h3 className="text-base font-bold font-mono text-white">
+                    {category.category}
+                  </h3>
+                  <p className="text-xs text-slate-400">
+                    {category.description}
+                  </p>
+                </div>
+              </div>
+
+              {/* Skills List */}
+              <div className="space-y-4 mt-6">
                 {category.skills.map((skill) => (
                   <div key={skill.name}>
-                    <div className="flex justify-between mb-2">
-                      <span className="text-sm font-medium text-gray-300">{skill.name}</span>
-                      <span className="text-xs text-gray-500">{skill.level}%</span>
+                    <div className="flex justify-between mb-1.5 text-xs font-mono">
+                      <span className="text-slate-300 font-medium">{skill.name}</span>
+                      <span className="text-tech-cyan font-bold">{skill.level}%</span>
                     </div>
-                    <div className="h-2 bg-dark-border rounded-full overflow-hidden">
+                    <div className="h-1.5 bg-tech-surface rounded-full overflow-hidden border border-tech-border/50">
                       <motion.div
                         initial={{ width: 0 }}
                         animate={inView ? { width: `${skill.level}%` } : {}}
-                        transition={{ delay: 0.5, duration: 0.8 }}
-                        className="h-full bg-gradient-to-r from-accent-blue to-accent-purple"
+                        transition={{ delay: 0.3 + idx * 0.1, duration: 0.8, ease: 'easeOut' }}
+                        className="h-full bg-gradient-to-r from-tech-cyan to-tech-indigo rounded-full"
                       />
                     </div>
                   </div>

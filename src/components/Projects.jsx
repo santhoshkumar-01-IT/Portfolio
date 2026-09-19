@@ -1,104 +1,110 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { FiGithub, FiExternalLink } from 'react-icons/fi'
-
-const projects = [
-  {
-    id: 1,
-    title: 'E-commerce Platform',
-    description: 'Full-stack e-commerce platform with payment integration',
-    tech: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-    image: '🛍️',
-    liveUrl: '#',
-    githubUrl: '#',
-  },
-  {
-    id: 2,
-    title: 'Task Management App',
-    description: 'Collaborative task management tool with real-time updates',
-    tech: ['React', 'Firebase', 'Tailwind CSS'],
-    image: '✅',
-    liveUrl: '#',
-    githubUrl: '#',
-  },
-  {
-    id: 3,
-    title: 'Blog Platform',
-    description: 'Content management system for bloggers',
-    tech: ['Next.js', 'PostgreSQL', 'Prisma'],
-    image: '📝',
-    liveUrl: '#',
-    githubUrl: '#',
-  },
-]
+import { FiGithub, FiExternalLink, FiGitBranch, FiFolder, FiStar } from 'react-icons/fi'
+import { projectsData } from '../utils/projectsData'
 
 export default function Projects() {
-  const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: true })
+  const { ref, inView } = useInView({ threshold: 0.15, triggerOnce: true })
 
   return (
-    <section id="projects" ref={ref} className="py-20 px-4 sm:px-6 lg:px-8">
+    <section id="projects" ref={ref} className="py-24 px-4 sm:px-6 lg:px-8 relative">
       <div className="max-w-6xl mx-auto">
-        <motion.h2
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          className="text-4xl font-bold text-center mb-16"
-        >
-          <span className="bg-gradient-to-r from-accent-blue to-accent-purple bg-clip-text text-transparent">
-            Featured Projects
+        {/* Section Header */}
+        <div className="text-center mb-16 space-y-2">
+          <span className="text-xs font-mono text-tech-cyan tracking-widest uppercase">
+            // 03. Engineering Portfolio
           </span>
-        </motion.h2>
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
+            Featured{' '}
+            <span className="bg-gradient-to-r from-tech-cyan to-tech-indigo bg-clip-text text-transparent">
+              Software Projects
+            </span>
+          </h2>
+          <div className="w-12 h-1 bg-gradient-to-r from-tech-cyan to-tech-indigo mx-auto rounded-full" />
+        </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, idx) => (
+          {projectsData.map((project, idx) => (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 25 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: idx * 0.2 }}
-              whileHover={{ y: -10 }}
-              className="group bg-dark-card/50 border border-dark-border rounded-xl overflow-hidden backdrop-blur hover:border-accent-blue/50 transition-all"
+              transition={{ delay: idx * 0.15, duration: 0.6 }}
+              className="group tech-glass-card rounded-xl overflow-hidden flex flex-col justify-between"
             >
-              {/* Image */}
-              <div className="h-40 bg-gradient-to-br from-accent-blue/20 to-accent-purple/20 flex items-center justify-center text-6xl group-hover:scale-110 transition-transform duration-300">
-                {project.image}
+              <div>
+                {/* Project Card Header */}
+                <div className="p-6 border-b border-tech-border/60 bg-tech-surface/40 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <FiFolder className="text-tech-cyan w-5 h-5" />
+                    <span className="text-xs font-mono text-slate-400 flex items-center gap-1">
+                      <FiGitBranch className="text-tech-indigo" />
+                      {project.branch || 'main'}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="flex items-center gap-1 text-xs font-mono text-amber-400">
+                      <FiStar className="w-3.5 h-3.5" />
+                      {project.stars || '12'}
+                    </span>
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-slate-400 hover:text-tech-cyan transition-colors"
+                      title="View GitHub Repository"
+                    >
+                      <FiGithub className="w-4 h-4" />
+                    </a>
+                  </div>
+                </div>
+
+                {/* Project Card Body */}
+                <div className="p-6 space-y-3">
+                  <div className="text-2xl mb-1">{project.icon || '🚀'}</div>
+                  <h3 className="text-lg font-bold text-white group-hover:text-tech-cyan font-mono transition-colors">
+                    {project.title}
+                  </h3>
+                  <p className="text-xs text-tech-cyan/80 font-mono">
+                    {project.tagline}
+                  </p>
+                  <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                    {project.description}
+                  </p>
+
+                  {/* Tech Stack Pills */}
+                  <div className="flex flex-wrap gap-1.5 pt-3">
+                    {project.technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="text-[11px] font-mono px-2 py-0.5 rounded bg-tech-surface border border-tech-border text-slate-300 group-hover:border-tech-cyan/30 transition-all"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
 
-              {/* Content */}
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2 text-white group-hover:text-accent-blue transition-colors">
-                  {project.title}
-                </h3>
-                <p className="text-gray-400 text-sm mb-4">{project.description}</p>
-
-                {/* Tech stack */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tech.map((tech) => (
-                    <span
-                      key={tech}
-                      className="text-xs px-2 py-1 rounded bg-dark-border text-gray-300"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Links */}
-                <div className="flex gap-3">
-                  <motion.a
-                    href={project.liveUrl}
-                    whileHover={{ scale: 1.1 }}
-                    className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded bg-accent-blue/20 text-accent-blue hover:bg-accent-blue/30 transition-colors"
-                  >
-                    <FiExternalLink size={16} /> Live
-                  </motion.a>
-                  <motion.a
-                    href={project.githubUrl}
-                    whileHover={{ scale: 1.1 }}
-                    className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded bg-accent-purple/20 text-accent-purple hover:bg-accent-purple/30 transition-colors"
-                  >
-                    <FiGithub size={16} /> Code
-                  </motion.a>
-                </div>
+              {/* Project Card Footer CTA */}
+              <div className="p-6 pt-0 mt-4 flex gap-3">
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-tech-cyan/10 border border-tech-cyan/30 text-tech-cyan text-xs font-mono font-medium hover:bg-tech-cyan hover:text-tech-bg transition-all"
+                >
+                  <FiExternalLink size={14} /> Live Demo
+                </a>
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center px-3 py-2 rounded-lg bg-tech-card border border-tech-border text-slate-300 hover:text-white hover:border-tech-border-glow transition-all"
+                  title="Source Code"
+                >
+                  <FiGithub size={14} />
+                </a>
               </div>
             </motion.div>
           ))}

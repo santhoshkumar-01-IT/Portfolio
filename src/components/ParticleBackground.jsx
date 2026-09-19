@@ -8,34 +8,36 @@ export default function ParticleBackground() {
     if (!canvas) return
 
     const ctx = canvas.getContext('2d')
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
+    let animationFrameId
+    let width = (canvas.width = window.innerWidth)
+    let height = (canvas.height = window.innerHeight)
 
     const particles = []
-    const particleCount = 50
+    const particleCount = Math.min(Math.floor((width * height) / 18000), 65)
 
-    class Particle {
+    class DataNode {
       constructor() {
-        this.x = Math.random() * canvas.width
-        this.y = Math.random() * canvas.height
-        this.size = Math.random() * 2 + 1
-        this.speedX = Math.random() * 0.5 - 0.25
-        this.speedY = Math.random() * 0.5 - 0.25
-        this.opacity = Math.random() * 0.5 + 0.2
+        this.x = Math.random() * width
+        this.y = Math.random() * height
+        this.size = Math.random() * 1.5 + 1
+        this.speedX = (Math.random() - 0.5) * 0.4
+        this.speedY = (Math.random() - 0.5) * 0.4
+        this.hue = Math.random() > 0.4 ? '185, 100%, 50%' : '240, 80%, 65%' // Cyan or Indigo
+        this.alpha = Math.random() * 0.5 + 0.2
       }
 
       update() {
         this.x += this.speedX
         this.y += this.speedY
 
-        if (this.x > canvas.width) this.x = 0
-        if (this.x < 0) this.x = canvas.width
-        if (this.y > canvas.height) this.y = 0
-        if (this.y < 0) this.y = canvas.height
+        if (this.x < 0) this.x = width
+        if (this.x > width) this.x = 0
+        if (this.y < 0) this.y = height
+        if (this.y > height) this.y = 0
       }
 
       draw() {
-        ctx.fillStyle = `rgba(0, 212, 255, ${this.opacity})`
+        ctx.fillStyle = `hsla(${this.hue}, ${this.alpha})`
         ctx.beginPath()
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
         ctx.fill()
@@ -43,36 +45,61 @@ export default function ParticleBackground() {
     }
 
     for (let i = 0; i < particleCount; i++) {
-      particles.push(new Particle())
+      particles.push(new DataNode())
     }
 
-    const animate = () => {
-      ctx.fillStyle = 'rgba(10, 14, 39, 0.1)'
-      ctx.fillRect(0, 0, canvas.width, canvas.height)
+    const connectNodes = () => {
+      const maxDistance = 120
+      for (let a = 0; a < particles.length; a++) {
+        for (let b = a + 1; b < particles.length; b++) {
+          const dx = particles[a].x - particles[b].x
+          const dy = particles[a].y - particles[b].y
+          const dist = Math.sqrt(dx * dx + dy * dy)
 
-      particles.forEach((particle) => {
-        particle.update()
-        particle.draw()
+          if (dist < maxDistance) {
+            const opacity = (1 - dist / maxDistance) * 0.15
+            ctx.strokeStyle = `rgba(56, 189, 248, ${opacity})`
+            ctx.lineWidth = 0.75
+            ctx.beginPath()
+            ctx.moveTo(particles[a].x, particles[a].y)
+            ctx.lineTo(particles[b].x, particles[b].y)
+            ctx.stroke()
+          }
+        }
+      }
+    }
+
+    const render = () => {
+      ctx.clearRect(0, 0, width, height)
+      
+      // Connect and draw particles
+      connectNodes()
+      particles.forEach((p) => {
+        p.update()
+        p.draw()
       })
 
-      requestAnimationFrame(animate)
+      animationFrameId = requestAnimationFrame(render)
     }
 
-    animate()
+    render()
 
     const handleResize = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
+      width = canvas.width = window.innerWidth
+      height = canvas.height = window.innerHeight
     }
 
     window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
+    return () => {
+      cancelAnimationFrame(animationFrameId)
+      window.removeEventListener('resize', handleResize)
+    }
   }, [])
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 z-0 pointer-events-none"
-    />
+    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+      <div className="absolute inset-0 bg-tech-grid opacity-60" />
+      <canvas ref={canvasRef} className="absolute inset-0" />
+    </div>
   )
 }
