@@ -1,11 +1,11 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { FiCode, FiServer, FiDatabase, FiCloud, FiTerminal } from 'react-icons/fi'
+import { FiCode, FiServer, FiDatabase, FiCloud } from 'react-icons/fi'
 
 const skillCategories = [
   {
     category: 'Frontend Engineering',
-    icon: <FiCode className="text-tech-cyan" />,
+    icon: <FiCode className="text-tech-crimson" />,
     description: 'Interactive, responsive & performant client interfaces',
     skills: [
       { name: 'React.js / Next.js', level: 90 },
@@ -17,7 +17,7 @@ const skillCategories = [
   },
   {
     category: 'Backend & Systems',
-    icon: <FiServer className="text-tech-indigo" />,
+    icon: <FiServer className="text-tech-rose" />,
     description: 'RESTful microservices, business logic & auth',
     skills: [
       { name: 'Node.js & Express.js', level: 88 },
@@ -29,7 +29,7 @@ const skillCategories = [
   },
   {
     category: 'Databases & Storage',
-    icon: <FiDatabase className="text-tech-purple" />,
+    icon: <FiDatabase className="text-tech-scarlet" />,
     description: 'Data modeling, optimization & transactions',
     skills: [
       { name: 'MongoDB / Mongoose', level: 88 },
@@ -59,16 +59,16 @@ export default function Skills() {
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16 space-y-2">
-          <span className="text-xs font-mono text-tech-cyan tracking-widest uppercase">
+          <span className="text-xs font-mono text-tech-crimson tracking-widest uppercase">
             // 02. Technical Arsenal
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
             Skills &{' '}
-            <span className="bg-gradient-to-r from-tech-cyan via-tech-blue to-tech-indigo bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-tech-crimson via-tech-rose to-tech-scarlet bg-clip-text text-transparent">
               Proficiencies
             </span>
           </h2>
-          <div className="w-12 h-1 bg-gradient-to-r from-tech-cyan to-tech-indigo mx-auto rounded-full" />
+          <div className="w-12 h-1 bg-gradient-to-r from-tech-crimson to-tech-rose mx-auto rounded-full" />
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
@@ -101,14 +101,14 @@ export default function Skills() {
                   <div key={skill.name}>
                     <div className="flex justify-between mb-1.5 text-xs font-mono">
                       <span className="text-slate-300 font-medium">{skill.name}</span>
-                      <span className="text-tech-cyan font-bold">{skill.level}%</span>
+                      <span className="text-tech-crimson font-bold">{skill.level}%</span>
                     </div>
                     <div className="h-1.5 bg-tech-surface rounded-full overflow-hidden border border-tech-border/50">
                       <motion.div
                         initial={{ width: 0 }}
                         animate={inView ? { width: `${skill.level}%` } : {}}
                         transition={{ delay: 0.3 + idx * 0.1, duration: 0.8, ease: 'easeOut' }}
-                        className="h-full bg-gradient-to-r from-tech-cyan to-tech-indigo rounded-full"
+                        className="h-full bg-gradient-to-r from-tech-crimson to-tech-ruby rounded-full"
                       />
                     </div>
                   </div>

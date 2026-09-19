@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FiMenu, FiX, FiTerminal, FiExternalLink } from 'react-icons/fi'
+import { FiMenu, FiX, FiTerminal } from 'react-icons/fi'
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
@@ -30,7 +30,7 @@ export default function Navigation() {
       transition={{ duration: 0.5 }}
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-tech-bg/90 backdrop-blur-md border-b border-tech-border/80 shadow-lg shadow-black/40'
+          ? 'bg-tech-bg/90 backdrop-blur-md border-b border-tech-border/80 shadow-lg shadow-black/60'
           : 'bg-transparent border-b border-transparent'
       }`}
     >
@@ -42,14 +42,14 @@ export default function Navigation() {
             whileHover={{ scale: 1.02 }}
             className="group flex items-center gap-2 font-mono text-lg font-bold text-white tracking-tight"
           >
-            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-tech-card border border-tech-cyan/30 text-tech-cyan group-hover:border-tech-cyan group-hover:shadow-[0_0_12px_rgba(0,242,254,0.4)] transition-all">
+            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-tech-card border border-tech-crimson/30 text-tech-crimson group-hover:border-tech-crimson group-hover:shadow-[0_0_15px_rgba(255,42,95,0.45)] transition-all">
               <FiTerminal className="w-4 h-4" />
             </div>
             <span>
-              <span className="text-tech-cyan">&lt;</span>
-              <span className="text-slate-100 group-hover:text-tech-cyan transition-colors">santhosh</span>
-              <span className="text-tech-indigo">.dev</span>
-              <span className="text-tech-cyan"> /&gt;</span>
+              <span className="text-tech-crimson">&lt;</span>
+              <span className="text-slate-100 group-hover:text-tech-crimson transition-colors">santhosh</span>
+              <span className="text-tech-ruby">.dev</span>
+              <span className="text-tech-crimson"> /&gt;</span>
             </span>
           </motion.a>
 
@@ -59,9 +59,9 @@ export default function Navigation() {
               <a
                 key={item.name}
                 href={item.href}
-                className="group px-3 py-1.5 rounded-md text-xs font-mono text-slate-300 hover:text-tech-cyan hover:bg-tech-card/60 transition-all duration-200"
+                className="group px-3 py-1.5 rounded-md text-xs font-mono text-slate-300 hover:text-tech-crimson hover:bg-tech-card/70 transition-all duration-200"
               >
-                <span className="text-tech-cyan/60 group-hover:text-tech-cyan mr-1 font-semibold">{item.num}.</span>
+                <span className="text-tech-crimson/60 group-hover:text-tech-crimson mr-1 font-semibold">{item.num}.</span>
                 <span className="font-sans text-sm">{item.name}</span>
               </a>
             ))}
@@ -78,7 +78,7 @@ export default function Navigation() {
               href="#contact"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
-              className="px-4 py-1.5 rounded-lg font-mono text-xs font-semibold bg-tech-cyan/10 border border-tech-cyan/40 text-tech-cyan hover:bg-tech-cyan hover:text-tech-bg transition-all duration-200 shadow-sm shadow-tech-cyan/10"
+              className="px-4 py-1.5 rounded-lg font-mono text-xs font-semibold bg-tech-crimson/10 border border-tech-crimson/40 text-tech-crimson hover:bg-tech-crimson hover:text-white transition-all duration-200 shadow-sm shadow-tech-crimson/20"
             >
               Get In Touch
             </motion.a>
@@ -88,7 +88,7 @@ export default function Navigation() {
           <div className="flex items-center md:hidden gap-2">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-lg bg-tech-card border border-tech-border text-slate-300 hover:text-tech-cyan focus:outline-none"
+              className="p-2 rounded-lg bg-tech-card border border-tech-border text-slate-300 hover:text-tech-crimson focus:outline-none"
               aria-label="Toggle Navigation"
             >
               {isOpen ? <FiX size={20} /> : <FiMenu size={20} />}
@@ -110,10 +110,10 @@ export default function Navigation() {
                 <a
                   key={item.name}
                   href={item.href}
-                  className="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-300 hover:text-tech-cyan hover:bg-tech-surface transition-colors"
+                  className="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-300 hover:text-tech-crimson hover:bg-tech-surface transition-colors"
                   onClick={() => setIsOpen(false)}
                 >
-                  <span className="text-tech-cyan font-bold">{item.num}.</span>
+                  <span className="text-tech-crimson font-bold">{item.num}.</span>
                   <span className="font-sans font-medium">{item.name}</span>
                 </a>
               ))}
@@ -124,7 +124,7 @@ export default function Navigation() {
                 <a
                   href="#contact"
                   onClick={() => setIsOpen(false)}
-                  className="px-3 py-1.5 rounded bg-tech-cyan text-tech-bg text-xs font-mono font-bold"
+                  className="px-3 py-1.5 rounded bg-tech-crimson text-white text-xs font-mono font-bold"
                 >
                   Contact Me
                 </a>

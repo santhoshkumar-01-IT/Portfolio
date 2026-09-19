@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { FiGithub, FiExternalLink, FiCode, FiAward } from 'react-icons/fi'
-import { SiLeetcode, SiHackerrank, SiStackoverflow } from 'react-icons/si'
+import { FiGithub, FiExternalLink } from 'react-icons/fi'
+import { SiLeetcode, SiHackerrank } from 'react-icons/si'
 
 const profiles = [
   {
@@ -10,8 +10,8 @@ const profiles = [
     icon: <FiGithub size={28} />,
     stats: 'Repositories & OSS Contributions',
     tag: 'Version Control',
-    accentColor: 'border-tech-cyan/40 hover:border-tech-cyan group-hover:text-tech-cyan',
-    iconBg: 'bg-tech-surface text-tech-cyan border-tech-cyan/30',
+    accentColor: 'border-tech-crimson/40 hover:border-tech-crimson group-hover:text-tech-crimson',
+    iconBg: 'bg-tech-surface text-tech-crimson border-tech-crimson/30',
     url: 'https://github.com/santhoshkumar-01-IT',
   },
   {
@@ -30,8 +30,8 @@ const profiles = [
     icon: <SiHackerrank size={28} />,
     stats: 'Language Badges & Skill Assessments',
     tag: 'Problem Solving',
-    accentColor: 'border-tech-emerald/40 hover:border-tech-emerald group-hover:text-tech-emerald',
-    iconBg: 'bg-emerald-950/40 text-tech-emerald border-tech-emerald/30',
+    accentColor: 'border-tech-rose/40 hover:border-tech-rose group-hover:text-tech-rose',
+    iconBg: 'bg-rose-950/40 text-tech-rose border-tech-rose/30',
     url: 'https://hackerrank.com',
   },
 ]
@@ -44,16 +44,16 @@ export default function CodingProfiles() {
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16 space-y-2">
-          <span className="text-xs font-mono text-tech-cyan tracking-widest uppercase">
+          <span className="text-xs font-mono text-tech-crimson tracking-widest uppercase">
             // 05. Developer Metrics
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
             Coding{' '}
-            <span className="bg-gradient-to-r from-tech-cyan via-tech-blue to-tech-indigo bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-tech-crimson via-tech-rose to-tech-scarlet bg-clip-text text-transparent">
               Platforms & Activity
             </span>
           </h2>
-          <div className="w-12 h-1 bg-gradient-to-r from-tech-cyan to-tech-indigo mx-auto rounded-full" />
+          <div className="w-12 h-1 bg-gradient-to-r from-tech-crimson to-tech-rose mx-auto rounded-full" />
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
@@ -82,7 +82,7 @@ export default function CodingProfiles() {
                 <h3 className="text-xl font-bold font-mono text-white mb-1 transition-colors">
                   {profile.name}
                 </h3>
-                <p className="text-xs text-tech-cyan font-mono mb-3">
+                <p className="text-xs text-tech-crimson font-mono mb-3">
                   {profile.handle}
                 </p>
                 <p className="text-slate-400 text-xs sm:text-sm">
@@ -90,7 +90,7 @@ export default function CodingProfiles() {
                 </p>
               </div>
 
-              <div className="pt-6 mt-6 border-t border-tech-border/80 flex items-center justify-between text-xs font-mono text-slate-300 group-hover:text-tech-cyan transition-colors">
+              <div className="pt-6 mt-6 border-t border-tech-border/80 flex items-center justify-between text-xs font-mono text-slate-300 group-hover:text-tech-crimson transition-colors">
                 <span>Access Profile</span>
                 <FiExternalLink className="group-hover:translate-x-1 transition-transform" />
               </div>

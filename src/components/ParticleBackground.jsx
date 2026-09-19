@@ -22,7 +22,8 @@ export default function ParticleBackground() {
         this.size = Math.random() * 1.5 + 1
         this.speedX = (Math.random() - 0.5) * 0.4
         this.speedY = (Math.random() - 0.5) * 0.4
-        this.hue = Math.random() > 0.4 ? '185, 100%, 50%' : '240, 80%, 65%' // Cyan or Indigo
+        // Crimson (348) or Ruby/Rose (330)
+        this.hue = Math.random() > 0.4 ? '348, 100%, 58%' : '330, 85%, 60%'
         this.alpha = Math.random() * 0.5 + 0.2
       }
 
@@ -58,7 +59,7 @@ export default function ParticleBackground() {
 
           if (dist < maxDistance) {
             const opacity = (1 - dist / maxDistance) * 0.15
-            ctx.strokeStyle = `rgba(56, 189, 248, ${opacity})`
+            ctx.strokeStyle = `rgba(244, 63, 94, ${opacity})`
             ctx.lineWidth = 0.75
             ctx.beginPath()
             ctx.moveTo(particles[a].x, particles[a].y)

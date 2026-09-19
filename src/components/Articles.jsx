@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { FiBookOpen, FiArrowUpRight, FiClock, FiCalendar } from 'react-icons/fi'
+import { FiArrowUpRight, FiClock, FiCalendar } from 'react-icons/fi'
 import { articlesData } from '../utils/projectsData'
 
 export default function Articles() {
@@ -11,16 +11,16 @@ export default function Articles() {
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16 space-y-2">
-          <span className="text-xs font-mono text-tech-cyan tracking-widest uppercase">
+          <span className="text-xs font-mono text-tech-crimson tracking-widest uppercase">
             // 04. Technical Writing
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
             Engineering{' '}
-            <span className="bg-gradient-to-r from-tech-cyan via-tech-blue to-tech-indigo bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-tech-crimson via-tech-rose to-tech-scarlet bg-clip-text text-transparent">
               Articles & Logs
             </span>
           </h2>
-          <div className="w-12 h-1 bg-gradient-to-r from-tech-cyan to-tech-indigo mx-auto rounded-full" />
+          <div className="w-12 h-1 bg-gradient-to-r from-tech-crimson to-tech-rose mx-auto rounded-full" />
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -34,7 +34,7 @@ export default function Articles() {
             >
               <div>
                 <div className="flex justify-between items-center mb-4 text-xs font-mono">
-                  <span className="px-2.5 py-1 rounded bg-tech-indigo/15 border border-tech-indigo/30 text-indigo-300">
+                  <span className="px-2.5 py-1 rounded bg-tech-crimson/15 border border-tech-crimson/30 text-rose-300">
                     {article.category}
                   </span>
                   <span className="flex items-center gap-1 text-slate-400">
@@ -43,7 +43,7 @@ export default function Articles() {
                   </span>
                 </div>
 
-                <h3 className="text-base font-bold mb-2 text-white group-hover:text-tech-cyan font-mono transition-colors line-clamp-2">
+                <h3 className="text-base font-bold mb-2 text-white group-hover:text-tech-crimson font-mono transition-colors line-clamp-2">
                   {article.title}
                 </h3>
                 
@@ -57,7 +57,7 @@ export default function Articles() {
                   <FiCalendar size={12} />
                   {article.date}
                 </span>
-                <span className="flex items-center gap-1 text-tech-cyan group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">
+                <span className="flex items-center gap-1 text-tech-crimson group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">
                   Read Article <FiArrowUpRight size={14} />
                 </span>
               </div>

@@ -30,16 +30,16 @@ export default function Contact() {
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16 space-y-2">
-          <span className="text-xs font-mono text-tech-cyan tracking-widest uppercase">
+          <span className="text-xs font-mono text-tech-crimson tracking-widest uppercase">
             // 06. Communication Protocol
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
             Initiate{' '}
-            <span className="bg-gradient-to-r from-tech-cyan via-tech-blue to-tech-indigo bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-tech-crimson via-tech-rose to-tech-scarlet bg-clip-text text-transparent">
               Contact
             </span>
           </h2>
-          <div className="w-12 h-1 bg-gradient-to-r from-tech-cyan to-tech-indigo mx-auto rounded-full" />
+          <div className="w-12 h-1 bg-gradient-to-r from-tech-crimson to-tech-rose mx-auto rounded-full" />
         </div>
 
         <div className="grid md:grid-cols-12 gap-10 items-start">
@@ -53,7 +53,7 @@ export default function Contact() {
             <div className="tech-glass-card rounded-xl p-6 sm:p-7 space-y-6">
               <div className="border-b border-tech-border/80 pb-4">
                 <h3 className="text-lg font-bold font-mono text-white flex items-center gap-2">
-                  <FiTerminal className="text-tech-cyan" />
+                  <FiTerminal className="text-tech-crimson" />
                   <span>Direct Channels</span>
                 </h3>
                 <p className="text-xs text-slate-400 mt-1">
@@ -63,14 +63,14 @@ export default function Contact() {
 
               {/* Email */}
               <div className="flex items-start gap-4">
-                <div className="p-3 rounded-lg bg-tech-surface border border-tech-border text-tech-cyan flex-shrink-0">
+                <div className="p-3 rounded-lg bg-tech-surface border border-tech-border text-tech-crimson flex-shrink-0">
                   <FiMail size={20} />
                 </div>
                 <div>
                   <h4 className="text-xs font-mono text-slate-400 uppercase tracking-wider">Email Address</h4>
                   <a
                     href="mailto:santhoshkumaroffc@gmail.com"
-                    className="text-sm font-mono text-slate-200 hover:text-tech-cyan transition-colors break-all"
+                    className="text-sm font-mono text-slate-200 hover:text-tech-crimson transition-colors break-all"
                   >
                     santhoshkumaroffc@gmail.com
                   </a>
@@ -79,14 +79,14 @@ export default function Contact() {
 
               {/* Phone */}
               <div className="flex items-start gap-4">
-                <div className="p-3 rounded-lg bg-tech-surface border border-tech-border text-tech-indigo flex-shrink-0">
+                <div className="p-3 rounded-lg bg-tech-surface border border-tech-border text-tech-rose flex-shrink-0">
                   <FiPhone size={20} />
                 </div>
                 <div>
                   <h4 className="text-xs font-mono text-slate-400 uppercase tracking-wider">Phone / WhatsApp</h4>
                   <a
                     href="tel:+919384767962"
-                    className="text-sm font-mono text-slate-200 hover:text-tech-indigo transition-colors"
+                    className="text-sm font-mono text-slate-200 hover:text-tech-rose transition-colors"
                   >
                     +91 9384767962
                   </a>
@@ -124,7 +124,7 @@ export default function Contact() {
                   <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
                   <span className="ml-2 text-slate-300">POST /api/v1/contact</span>
                 </div>
-                <span className="text-tech-cyan">SSL • Encrypted</span>
+                <span className="text-tech-crimson">SSL • Encrypted</span>
               </div>
 
               {/* Form Body */}
@@ -141,7 +141,7 @@ export default function Contact() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-2.5 rounded-lg bg-tech-surface border border-tech-border text-white text-sm font-sans placeholder-slate-500 focus:outline-none focus:border-tech-cyan focus:ring-1 focus:ring-tech-cyan transition-all"
+                      className="w-full px-4 py-2.5 rounded-lg bg-tech-surface border border-tech-border text-white text-sm font-sans placeholder-slate-500 focus:outline-none focus:border-tech-crimson focus:ring-1 focus:ring-tech-crimson transition-all"
                     />
                   </div>
                   <div>
@@ -155,7 +155,7 @@ export default function Contact() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-2.5 rounded-lg bg-tech-surface border border-tech-border text-white text-sm font-sans placeholder-slate-500 focus:outline-none focus:border-tech-cyan focus:ring-1 focus:ring-tech-cyan transition-all"
+                      className="w-full px-4 py-2.5 rounded-lg bg-tech-surface border border-tech-border text-white text-sm font-sans placeholder-slate-500 focus:outline-none focus:border-tech-crimson focus:ring-1 focus:ring-tech-crimson transition-all"
                     />
                   </div>
                 </div>
@@ -171,7 +171,7 @@ export default function Contact() {
                     value={formData.subject}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2.5 rounded-lg bg-tech-surface border border-tech-border text-white text-sm font-sans placeholder-slate-500 focus:outline-none focus:border-tech-cyan focus:ring-1 focus:ring-tech-cyan transition-all"
+                    className="w-full px-4 py-2.5 rounded-lg bg-tech-surface border border-tech-border text-white text-sm font-sans placeholder-slate-500 focus:outline-none focus:border-tech-crimson focus:ring-1 focus:ring-tech-crimson transition-all"
                   />
                 </div>
 
@@ -186,7 +186,7 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     rows="4"
-                    className="w-full px-4 py-2.5 rounded-lg bg-tech-surface border border-tech-border text-white text-sm font-sans placeholder-slate-500 focus:outline-none focus:border-tech-cyan focus:ring-1 focus:ring-tech-cyan transition-all resize-none"
+                    className="w-full px-4 py-2.5 rounded-lg bg-tech-surface border border-tech-border text-white text-sm font-sans placeholder-slate-500 focus:outline-none focus:border-tech-crimson focus:ring-1 focus:ring-tech-crimson transition-all resize-none"
                   />
                 </div>
 
@@ -194,11 +194,11 @@ export default function Contact() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   type="submit"
-                  className="w-full py-3 rounded-lg bg-gradient-to-r from-tech-cyan to-tech-blue text-tech-bg font-mono font-bold text-sm shadow-[0_0_20px_rgba(0,242,254,0.3)] hover:shadow-[0_0_30px_rgba(0,242,254,0.5)] transition-all flex items-center justify-center gap-2"
+                  className="w-full py-3 rounded-lg bg-gradient-to-r from-tech-crimson via-tech-ruby to-tech-rose text-white font-mono font-bold text-sm shadow-[0_0_20px_rgba(255,42,95,0.35)] hover:shadow-[0_0_30px_rgba(255,42,95,0.6)] transition-all flex items-center justify-center gap-2"
                 >
                   {submitted ? (
                     <>
-                      <FiCheckCircle className="text-tech-bg text-base" />
+                      <FiCheckCircle className="text-white text-base" />
                       <span>Message Dispatched Successfully!</span>
                     </>
                   ) : (

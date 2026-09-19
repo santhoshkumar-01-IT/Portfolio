@@ -1,18 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { FiArrowDown, FiCode, FiTerminal, FiExternalLink, FiDownload, FiFolder, FiCheckCircle } from 'react-icons/fi'
-import { SiJavascript, SiReact, SiNodedotjs, SiPython, SiDocker, SiPostgresql, SiTailwindcss } from 'react-icons/si'
+import { FiArrowDown, FiCode, FiTerminal } from 'react-icons/fi'
+import { SiJavascript, SiReact, SiNodedotjs, SiDocker, SiPostgresql, SiTailwindcss } from 'react-icons/si'
 
 export default function Hero() {
-  const [activeTab, setActiveTab] = useState('santhosh.ts')
-  const [copied, setCopied] = useState(false)
-
-  const copyCommand = () => {
-    navigator.clipboard?.writeText('npx santhosh-kumar')
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
-
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -35,9 +26,9 @@ export default function Hero() {
 
   const techBadges = [
     { name: 'React', icon: <SiReact className="text-[#61DAFB]" /> },
-    { name: 'Node.js', icon: <SiNodedotjs className="text-[#339933]" /> },
+    { name: 'Node.js', icon: <SiNodedotjs className="text-[#68a063]" /> },
     { name: 'JavaScript', icon: <SiJavascript className="text-[#F7DF1E]" /> },
-    { name: 'Tailwind CSS', icon: <SiTailwindcss className="text-[#06B6D4]" /> },
+    { name: 'Tailwind CSS', icon: <SiTailwindcss className="text-[#38BDF8]" /> },
     { name: 'PostgreSQL', icon: <SiPostgresql className="text-[#4169E1]" /> },
     { name: 'Docker', icon: <SiDocker className="text-[#2496ED]" /> },
   ]
@@ -47,10 +38,10 @@ export default function Hero() {
       id="home"
       className="min-h-screen flex items-center justify-center relative pt-24 pb-16 overflow-hidden"
     >
-      {/* Background ambient lighting */}
+      {/* Obsidian Crimson ambient lighting */}
       <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute top-1/4 left-10 w-96 h-96 bg-tech-cyan/15 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-tech-indigo/15 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 left-10 w-96 h-96 bg-tech-crimson/15 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-tech-ruby/15 rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 w-full">
@@ -65,7 +56,7 @@ export default function Hero() {
           >
             {/* Terminal command line tag */}
             <motion.div variants={itemVariants} className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md bg-tech-card/90 border border-tech-cyan/30 text-tech-cyan font-mono text-xs font-medium shadow-[0_0_15px_rgba(0,242,254,0.15)]">
+              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md bg-tech-card/90 border border-tech-crimson/30 text-tech-crimson font-mono text-xs font-medium shadow-[0_0_15px_rgba(255,42,95,0.2)]">
                 <span className="inline-block w-2 h-2 rounded-full bg-tech-emerald animate-pulse" />
                 <span>~/santhosh-kumar &gt; whoami</span>
               </span>
@@ -78,7 +69,7 @@ export default function Hero() {
               </h2>
               <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white">
                 Santhosh{' '}
-                <span className="bg-gradient-to-r from-tech-cyan via-tech-blue to-tech-indigo bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-tech-crimson via-tech-rose to-tech-scarlet bg-clip-text text-transparent">
                   Kumar
                 </span>
               </h1>
@@ -106,7 +97,7 @@ export default function Hero() {
                 {techBadges.map((tech) => (
                   <div
                     key={tech.name}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-tech-card border border-tech-border text-xs font-mono text-slate-300 hover:border-tech-cyan/50 hover:text-white transition-all shadow-sm"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-tech-card border border-tech-border text-xs font-mono text-slate-300 hover:border-tech-crimson/50 hover:text-white transition-all shadow-sm"
                   >
                     {tech.icon}
                     <span>{tech.name}</span>
@@ -124,7 +115,7 @@ export default function Hero() {
                 href="#projects"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
-                className="px-6 py-3 rounded-lg bg-gradient-to-r from-tech-cyan to-tech-blue text-tech-bg font-mono text-sm font-bold shadow-[0_0_20px_rgba(0,242,254,0.3)] hover:shadow-[0_0_30px_rgba(0,242,254,0.5)] transition-all flex items-center gap-2"
+                className="px-6 py-3 rounded-lg bg-gradient-to-r from-tech-crimson via-tech-ruby to-tech-rose text-white font-mono text-sm font-bold shadow-[0_0_20px_rgba(255,42,95,0.35)] hover:shadow-[0_0_30px_rgba(255,42,95,0.6)] transition-all flex items-center gap-2"
               >
                 <FiCode className="w-4 h-4" />
                 <span>Explore Projects</span>
@@ -134,7 +125,7 @@ export default function Hero() {
                 href="#contact"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
-                className="px-6 py-3 rounded-lg bg-tech-card/80 border border-tech-border hover:border-tech-cyan/50 text-slate-200 hover:text-tech-cyan font-mono text-sm font-medium transition-all flex items-center gap-2"
+                className="px-6 py-3 rounded-lg bg-tech-card/80 border border-tech-border hover:border-tech-crimson/50 text-slate-200 hover:text-tech-crimson font-mono text-sm font-medium transition-all flex items-center gap-2"
               >
                 <FiTerminal className="w-4 h-4" />
                 <span>Contact Engineer</span>
@@ -142,14 +133,14 @@ export default function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* Right Column: Interactive Code Editor / Terminal Window */}
+          {/* Right Column: Obsidian Code Editor */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
             className="lg:col-span-5"
           >
-            <div className="rounded-xl overflow-hidden bg-tech-card border border-tech-border shadow-2xl shadow-black/80">
+            <div className="rounded-xl overflow-hidden bg-tech-card border border-tech-border shadow-2xl shadow-black/90">
               {/* Window Header */}
               <div className="flex items-center justify-between px-4 py-3 bg-tech-surface border-b border-tech-border">
                 <div className="flex items-center gap-2">
@@ -159,8 +150,8 @@ export default function Hero() {
                 </div>
                 
                 {/* File Tab */}
-                <div className="flex items-center gap-2 px-3 py-1 rounded bg-tech-card text-xs font-mono text-tech-cyan border border-tech-cyan/20">
-                  <FiCode className="text-tech-cyan" />
+                <div className="flex items-center gap-2 px-3 py-1 rounded bg-tech-card text-xs font-mono text-tech-crimson border border-tech-crimson/30">
+                  <FiCode className="text-tech-crimson" />
                   <span>santhosh.ts</span>
                 </div>
 
@@ -168,14 +159,14 @@ export default function Hero() {
               </div>
 
               {/* Code Editor Body */}
-              <div className="p-5 font-mono text-xs sm:text-sm leading-relaxed overflow-x-auto text-slate-300 bg-[#0a0f1d]">
+              <div className="p-5 font-mono text-xs sm:text-sm leading-relaxed overflow-x-auto text-slate-300 bg-[#0d090f]">
                 <p className="text-slate-500 italic mb-2">
                   // Software Engineer Profile Specification
                 </p>
                 
                 <p>
-                  <span className="text-purple-400">const</span>{' '}
-                  <span className="text-blue-400">engineer</span>:{' '}
+                  <span className="text-tech-rose">const</span>{' '}
+                  <span className="text-rose-300">engineer</span>:{' '}
                   <span className="text-emerald-400">Developer</span> = {'{'}
                 </p>
                 
@@ -209,12 +200,12 @@ export default function Hero() {
                 <p className="text-slate-300 mb-3">{'}'};</p>
 
                 <div className="border-t border-tech-border/80 pt-3 mt-3">
-                  <p className="text-purple-400">function <span className="text-blue-400">buildSystem</span>() {'{'}</p>
+                  <p className="text-tech-rose">function <span className="text-rose-300">buildSystem</span>() {'{'}</p>
                   <p className="pl-4 text-slate-400">
-                    <span className="text-purple-400">return</span> engineer.passions
+                    <span className="text-tech-rose">return</span> engineer.passions
                   </p>
                   <p className="pl-8 text-slate-400">
-                    .<span className="text-blue-400">map</span>(p =&gt; <span className="text-tech-cyan">`🚀 Crafting ${'{'}p{'}'}`</span>);
+                    .<span className="text-rose-300">map</span>(p =&gt; <span className="text-tech-crimson">`🚀 Crafting ${'{'}p{'}'}`</span>);
                   </p>
                   <p className="text-slate-300">{'}'}</p>
                 </div>
@@ -223,10 +214,10 @@ export default function Hero() {
               {/* Terminal Footer Info Bar */}
               <div className="px-4 py-2 bg-tech-surface border-t border-tech-border flex items-center justify-between text-[11px] font-mono text-slate-400">
                 <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-tech-cyan animate-pulse" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-tech-crimson animate-pulse" />
                   <span>Ready • utf-8</span>
                 </div>
-                <div className="text-tech-cyan">LF • Spaces: 2</div>
+                <div className="text-tech-crimson">LF • Spaces: 2</div>
               </div>
             </div>
           </motion.div>
@@ -239,9 +230,9 @@ export default function Hero() {
           transition={{ duration: 2, repeat: Infinity }}
           className="mt-16 text-center"
         >
-          <a href="#about" className="inline-flex flex-col items-center gap-2 text-xs font-mono text-slate-400 hover:text-tech-cyan transition-colors">
+          <a href="#about" className="inline-flex flex-col items-center gap-2 text-xs font-mono text-slate-400 hover:text-tech-crimson transition-colors">
             <span>// scroll down</span>
-            <FiArrowDown className="text-lg text-tech-cyan" />
+            <FiArrowDown className="text-lg text-tech-crimson" />
           </a>
         </motion.div>
       </div>

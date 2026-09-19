@@ -7,17 +7,17 @@ export default function About() {
 
   const highlights = [
     {
-      icon: <FiLayers className="text-tech-cyan w-5 h-5" />,
+      icon: <FiLayers className="text-tech-crimson w-5 h-5" />,
       title: 'Scalable Architecture',
       desc: 'Building modular, testable, and maintainable software systems designed for high availability and growth.',
     },
     {
-      icon: <FiServer className="text-tech-indigo w-5 h-5" />,
+      icon: <FiServer className="text-tech-rose w-5 h-5" />,
       title: 'Full Stack Engineering',
       desc: 'Seamless integration between responsive client-side SPAs and resilient REST/GraphQL backend microservices.',
     },
     {
-      icon: <FiCpu className="text-tech-purple w-5 h-5" />,
+      icon: <FiCpu className="text-tech-scarlet w-5 h-5" />,
       title: 'Performance & Optimization',
       desc: 'Focused on sub-second render times, database query tuning, clean algorithmic complexity, and caching.',
     },
@@ -33,16 +33,16 @@ export default function About() {
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16 space-y-2">
-          <span className="text-xs font-mono text-tech-cyan tracking-widest uppercase">
+          <span className="text-xs font-mono text-tech-crimson tracking-widest uppercase">
             // 01. Engineering Profile
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
             About{' '}
-            <span className="bg-gradient-to-r from-tech-cyan to-tech-indigo bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-tech-crimson via-tech-rose to-tech-scarlet bg-clip-text text-transparent">
               The Developer
             </span>
           </h2>
-          <div className="w-12 h-1 bg-gradient-to-r from-tech-cyan to-tech-indigo mx-auto rounded-full" />
+          <div className="w-12 h-1 bg-gradient-to-r from-tech-crimson to-tech-rose mx-auto rounded-full" />
         </div>
 
         <div className="grid lg:grid-cols-12 gap-12 items-center">
@@ -54,7 +54,7 @@ export default function About() {
             className="lg:col-span-7 space-y-6"
           >
             <div className="tech-glass-card rounded-xl p-6 sm:p-8 space-y-4">
-              <div className="flex items-center gap-2 text-xs font-mono text-tech-cyan mb-2">
+              <div className="flex items-center gap-2 text-xs font-mono text-tech-crimson mb-2">
                 <FiTerminal />
                 <span>~/system/overview.md</span>
               </div>
@@ -68,19 +68,19 @@ export default function About() {
               {/* Quick Tech Checklist */}
               <div className="grid sm:grid-cols-2 gap-3 pt-4 border-t border-tech-border/80 text-xs sm:text-sm font-mono text-slate-300">
                 <div className="flex items-center gap-2">
-                  <FiCheckSquare className="text-tech-cyan flex-shrink-0" />
+                  <FiCheckSquare className="text-tech-crimson flex-shrink-0" />
                   <span>TypeScript & Modern JavaScript</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <FiCheckSquare className="text-tech-cyan flex-shrink-0" />
+                  <FiCheckSquare className="text-tech-crimson flex-shrink-0" />
                   <span>React & Next.js Ecosystem</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <FiCheckSquare className="text-tech-cyan flex-shrink-0" />
+                  <FiCheckSquare className="text-tech-crimson flex-shrink-0" />
                   <span>Node.js & Express REST APIs</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <FiCheckSquare className="text-tech-cyan flex-shrink-0" />
+                  <FiCheckSquare className="text-tech-crimson flex-shrink-0" />
                   <span>SQL, NoSQL & Schema Design</span>
                 </div>
               </div>
@@ -94,17 +94,17 @@ export default function About() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="lg:col-span-5 grid sm:grid-cols-2 lg:grid-cols-1 gap-4"
           >
-            {highlights.map((item, index) => (
+            {highlights.map((item) => (
               <div
                 key={item.title}
-                className="tech-glass-card rounded-xl p-5 hover:border-tech-cyan/40 transition-all group"
+                className="tech-glass-card rounded-xl p-5 hover:border-tech-crimson/40 transition-all group"
               >
                 <div className="flex items-start gap-4">
-                  <div className="p-2.5 rounded-lg bg-tech-surface border border-tech-border group-hover:border-tech-cyan/50 group-hover:bg-tech-card transition-all">
+                  <div className="p-2.5 rounded-lg bg-tech-surface border border-tech-border group-hover:border-tech-crimson/50 group-hover:bg-tech-card transition-all">
                     {item.icon}
                   </div>
                   <div>
-                    <h3 className="text-sm font-bold text-slate-100 font-mono group-hover:text-tech-cyan transition-colors">
+                    <h3 className="text-sm font-bold text-slate-100 font-mono group-hover:text-tech-crimson transition-colors">
                       {item.title}
                     </h3>
                     <p className="text-xs text-slate-400 mt-1 leading-normal">

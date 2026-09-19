@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { FiArrowUp, FiTerminal, FiHeart, FiCode } from 'react-icons/fi'
+import { FiArrowUp } from 'react-icons/fi'
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa'
 import { SiLeetcode } from 'react-icons/si'
 
@@ -23,10 +23,10 @@ export default function Footer() {
           {/* Left: Branding & Status */}
           <div className="text-center md:text-left space-y-2">
             <div className="flex items-center justify-center md:justify-start gap-2 font-mono text-base font-bold text-white">
-              <span className="text-tech-cyan">&lt;</span>
+              <span className="text-tech-crimson">&lt;</span>
               <span>santhosh</span>
-              <span className="text-tech-indigo">.dev</span>
-              <span className="text-tech-cyan"> /&gt;</span>
+              <span className="text-tech-rose">.dev</span>
+              <span className="text-tech-crimson"> /&gt;</span>
             </div>
             <p className="text-slate-400 text-xs font-mono">
               Software Engineer • Architecting Scalable & Performant Web Applications
@@ -43,7 +43,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.15, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-10 h-10 rounded-lg bg-tech-card border border-tech-border hover:border-tech-cyan/50 flex items-center justify-center text-slate-300 hover:text-tech-cyan transition-all"
+                className="w-10 h-10 rounded-lg bg-tech-card border border-tech-border hover:border-tech-crimson/50 flex items-center justify-center text-slate-300 hover:text-tech-crimson transition-all"
                 title={link.label}
               >
                 {link.icon}
@@ -56,7 +56,7 @@ export default function Footer() {
             onClick={scrollToTop}
             whileHover={{ scale: 1.1, y: -2 }}
             whileTap={{ scale: 0.95 }}
-            className="flex items-center gap-2 px-3 py-2 rounded-lg bg-tech-card border border-tech-border hover:border-tech-cyan/50 text-slate-300 hover:text-tech-cyan text-xs font-mono transition-all"
+            className="flex items-center gap-2 px-3 py-2 rounded-lg bg-tech-card border border-tech-border hover:border-tech-crimson/50 text-slate-300 hover:text-tech-crimson text-xs font-mono transition-all"
             aria-label="Back to top"
           >
             <span>TOP</span>
