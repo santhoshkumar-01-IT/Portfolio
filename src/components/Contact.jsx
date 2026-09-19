@@ -25,7 +25,7 @@ export default function Contact() {
     <section
       id="contact"
       ref={ref}
-      className="py-24 px-4 sm:px-6 lg:px-8 relative bg-zinc-950/40"
+      className="py-24 px-4 sm:px-6 lg:px-8 relative"
     >
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}

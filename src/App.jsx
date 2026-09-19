@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import Navigation from './components/Navigation'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -8,14 +7,14 @@ import Articles from './components/Articles'
 import CodingProfiles from './components/CodingProfiles'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
-import ParticleBackground from './components/ParticleBackground'
+import ScrollPerspectiveBackground from './components/ScrollPerspectiveBackground'
 import { ThemeProvider } from './context/ThemeContext'
 
 export default function App() {
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-dark-bg text-gray-100 overflow-x-hidden">
-        <ParticleBackground />
+      <div className="min-h-screen bg-tech-bg text-zinc-100 overflow-x-hidden relative">
+        <ScrollPerspectiveBackground />
         <Navigation />
         <Hero />
         <About />
