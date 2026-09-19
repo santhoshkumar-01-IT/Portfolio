@@ -53,7 +53,7 @@ body {
   background-image: radial-gradient(circle, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
 }
 
-/* Frosted Monochrome Glass Panels (Linear / Vercel style) */
+/* Frosted Monochrome Glass Panels */
 .tech-glass {
   background: rgba(18, 18, 18, 0.7);
   backdrop-filter: blur(16px);
@@ -70,18 +70,54 @@ body {
 }
 
 .tech-glass-card:hover {
-  border-color: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.8), 0 0 25px rgba(255, 255, 255, 0.12);
   transform: translateY(-2px);
 }
 
-/* Monochrome Subtle Glows */
-.glow-white {
-  box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
+/* White Neon Glow Utility Classes */
+.btn-neon-white {
+  position: relative;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.glow-subtle {
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.08);
+.btn-neon-white:hover {
+  border-color: #ffffff !important;
+  box-shadow: 
+    0 0 10px rgba(255, 255, 255, 0.8),
+    0 0 25px rgba(255, 255, 255, 0.45),
+    0 0 45px rgba(255, 255, 255, 0.25) !important;
+}
+
+.btn-neon-white:active {
+  transform: scale(0.97);
+  box-shadow: 
+    0 0 15px rgba(255, 255, 255, 1),
+    0 0 35px rgba(255, 255, 255, 0.7),
+    0 0 60px rgba(255, 255, 255, 0.4) !important;
+}
+
+.btn-neon-solid {
+  background-color: #ffffff;
+  color: #000000;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-neon-solid:hover {
+  background-color: #ffffff;
+  box-shadow: 
+    0 0 15px rgba(255, 255, 255, 0.9),
+    0 0 30px rgba(255, 255, 255, 0.6),
+    0 0 50px rgba(255, 255, 255, 0.35) !important;
+  transform: translateY(-1px);
+}
+
+.btn-neon-solid:active {
+  transform: scale(0.97);
+  box-shadow: 
+    0 0 20px rgba(255, 255, 255, 1),
+    0 0 40px rgba(255, 255, 255, 0.8),
+    0 0 70px rgba(255, 255, 255, 0.5) !important;
 }
 
 /* Code block typography */

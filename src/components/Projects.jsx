@@ -51,7 +51,7 @@ export default function Projects() {
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-zinc-400 hover:text-white transition-colors"
+                      className="btn-neon-white p-1 rounded text-zinc-400 hover:text-white transition-colors"
                       title="View GitHub Repository"
                     >
                       <FiGithub className="w-4 h-4" />
@@ -77,7 +77,7 @@ export default function Projects() {
                     {project.technologies.map((tech) => (
                       <span
                         key={tech}
-                        className="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-900 border border-white/[0.08] text-zinc-300 group-hover:border-white/20 transition-all"
+                        className="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-900 border border-white/[0.08] text-zinc-300 hover:border-white/40 hover:text-white transition-all cursor-default"
                       >
                         {tech}
                       </span>
@@ -86,13 +86,13 @@ export default function Projects() {
                 </div>
               </div>
 
-              {/* Project Card Footer CTA */}
+              {/* Project Card Footer CTA with White Neon Glow */}
               <div className="p-6 pt-0 mt-4 flex gap-2.5">
                 <a
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-md bg-white text-black text-xs font-mono font-medium hover:bg-zinc-200 transition-all"
+                  className="btn-neon-solid flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-md text-xs font-mono font-semibold"
                 >
                   <FiExternalLink size={13} /> Live Demo
                 </a>
@@ -100,7 +100,7 @@ export default function Projects() {
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center px-3 py-2 rounded-md bg-zinc-900 border border-white/10 text-zinc-300 hover:text-white hover:border-white/30 transition-all"
+                  className="btn-neon-white flex items-center justify-center px-3 py-2 rounded-md bg-zinc-900 border border-white/10 text-zinc-300 hover:text-white"
                   title="Source Code"
                 >
                   <FiGithub size={13} />

@@ -42,14 +42,14 @@ export default function Navigation() {
             whileHover={{ scale: 1.02 }}
             className="group flex items-center gap-2.5 font-mono text-base font-semibold text-white tracking-tight"
           >
-            <div className="flex items-center justify-center w-7 h-7 rounded-md bg-zinc-900 border border-white/10 text-white group-hover:border-white/40 group-hover:bg-zinc-800 transition-all">
+            <div className="flex items-center justify-center w-7 h-7 rounded-md bg-zinc-900 border border-white/10 text-white group-hover:border-white group-hover:shadow-[0_0_15px_rgba(255,255,255,0.7)] transition-all">
               <FiTerminal className="w-3.5 h-3.5" />
             </div>
             <span className="tracking-tight">
-              <span className="text-zinc-400">&lt;</span>
-              <span className="text-white font-medium">santhosh</span>
+              <span className="text-zinc-500">&lt;</span>
+              <span className="text-white font-medium group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.6)] transition-all">santhosh</span>
               <span className="text-zinc-400">.dev</span>
-              <span className="text-zinc-400"> /&gt;</span>
+              <span className="text-zinc-500"> /&gt;</span>
             </span>
           </motion.a>
 
@@ -59,7 +59,7 @@ export default function Navigation() {
               <a
                 key={item.name}
                 href={item.href}
-                className="group px-3 py-1.5 rounded-md text-xs font-mono text-zinc-400 hover:text-white hover:bg-zinc-900/60 transition-all duration-200"
+                className="group px-3 py-1.5 rounded-md text-xs font-mono text-zinc-400 hover:text-white hover:bg-zinc-900/80 hover:shadow-[0_0_12px_rgba(255,255,255,0.15)] transition-all duration-200"
               >
                 <span className="text-zinc-500 group-hover:text-zinc-300 mr-1.5 font-normal">{item.num}.</span>
                 <span className="font-sans text-sm font-medium">{item.name}</span>
@@ -67,28 +67,26 @@ export default function Navigation() {
             ))}
           </div>
 
-          {/* Status & CTA Badge */}
+          {/* Status & CTA Badge with White Neon Glow */}
           <div className="hidden lg:flex items-center gap-4">
             <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900/80 border border-white/10 text-[11px] font-mono text-zinc-300">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
               <span className="text-zinc-300">Available for hire</span>
             </div>
             
-            <motion.a
+            <a
               href="#contact"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="px-3.5 py-1.5 rounded-md font-mono text-xs font-semibold bg-white text-black hover:bg-zinc-200 transition-all duration-200 shadow-sm"
+              className="btn-neon-solid px-4 py-1.5 rounded-md font-mono text-xs font-semibold"
             >
               Get In Touch
-            </motion.a>
+            </a>
           </div>
 
           {/* Mobile menu trigger */}
           <div className="flex items-center md:hidden gap-2">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-lg bg-zinc-900 border border-white/10 text-zinc-300 hover:text-white focus:outline-none"
+              className="btn-neon-white p-2 rounded-lg bg-zinc-900 border border-white/10 text-zinc-300 hover:text-white focus:outline-none"
               aria-label="Toggle Navigation"
             >
               {isOpen ? <FiX size={18} /> : <FiMenu size={18} />}
@@ -124,7 +122,7 @@ export default function Navigation() {
                 <a
                   href="#contact"
                   onClick={() => setIsOpen(false)}
-                  className="px-3 py-1.5 rounded bg-white text-black text-xs font-mono font-semibold"
+                  className="btn-neon-solid px-3.5 py-1.5 rounded text-xs font-mono font-semibold"
                 >
                   Contact Me
                 </a>

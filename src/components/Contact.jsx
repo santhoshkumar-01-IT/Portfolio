@@ -141,7 +141,7 @@ export default function Contact() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-3.5 py-2.5 rounded-md bg-zinc-900/90 border border-white/10 text-white text-sm font-sans placeholder-zinc-500 focus:outline-none focus:border-white/30 transition-all"
+                      className="w-full px-3.5 py-2.5 rounded-md bg-zinc-900/90 border border-white/10 text-white text-sm font-sans placeholder-zinc-500 focus:outline-none focus:border-white focus:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all"
                     />
                   </div>
                   <div>
@@ -155,7 +155,7 @@ export default function Contact() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-3.5 py-2.5 rounded-md bg-zinc-900/90 border border-white/10 text-white text-sm font-sans placeholder-zinc-500 focus:outline-none focus:border-white/30 transition-all"
+                      className="w-full px-3.5 py-2.5 rounded-md bg-zinc-900/90 border border-white/10 text-white text-sm font-sans placeholder-zinc-500 focus:outline-none focus:border-white focus:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all"
                     />
                   </div>
                 </div>
@@ -171,7 +171,7 @@ export default function Contact() {
                     value={formData.subject}
                     onChange={handleChange}
                     required
-                    className="w-full px-3.5 py-2.5 rounded-md bg-zinc-900/90 border border-white/10 text-white text-sm font-sans placeholder-zinc-500 focus:outline-none focus:border-white/30 transition-all"
+                    className="w-full px-3.5 py-2.5 rounded-md bg-zinc-900/90 border border-white/10 text-white text-sm font-sans placeholder-zinc-500 focus:outline-none focus:border-white focus:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all"
                   />
                 </div>
 
@@ -186,15 +186,13 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     rows="4"
-                    className="w-full px-3.5 py-2.5 rounded-md bg-zinc-900/90 border border-white/10 text-white text-sm font-sans placeholder-zinc-500 focus:outline-none focus:border-white/30 transition-all resize-none"
+                    className="w-full px-3.5 py-2.5 rounded-md bg-zinc-900/90 border border-white/10 text-white text-sm font-sans placeholder-zinc-500 focus:outline-none focus:border-white focus:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all resize-none"
                   />
                 </div>
 
-                <motion.button
-                  whileHover={{ scale: 1.01 }}
-                  whileTap={{ scale: 0.99 }}
+                <button
                   type="submit"
-                  className="w-full py-2.5 rounded-md bg-white text-black font-mono font-semibold text-xs hover:bg-zinc-200 transition-all flex items-center justify-center gap-2 shadow-sm"
+                  className="btn-neon-solid w-full py-3 rounded-md font-mono font-semibold text-xs flex items-center justify-center gap-2"
                 >
                   {submitted ? (
                     <>
@@ -207,7 +205,7 @@ export default function Contact() {
                       <span>Transmit Message</span>
                     </>
                   )}
-                </motion.button>
+                </button>
               </form>
             </div>
           </motion.div>

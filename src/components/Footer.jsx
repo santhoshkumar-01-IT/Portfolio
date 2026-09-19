@@ -33,35 +33,31 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Center: Social Links */}
+          {/* Center: Social Links with White Neon Glow */}
           <div className="flex items-center gap-2.5">
             {socialLinks.map((link) => (
-              <motion.a
+              <a
                 key={link.label}
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.08, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-9 h-9 rounded-md bg-zinc-900 border border-white/10 hover:border-white/30 flex items-center justify-center text-zinc-300 hover:text-white transition-all"
+                className="btn-neon-white w-9 h-9 rounded-md bg-zinc-900 border border-white/10 flex items-center justify-center text-zinc-300 hover:text-white"
                 title={link.label}
               >
                 {link.icon}
-              </motion.a>
+              </a>
             ))}
           </div>
 
-          {/* Right: Scroll to top */}
-          <motion.button
+          {/* Right: Scroll to top with White Neon Glow */}
+          <button
             onClick={scrollToTop}
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-zinc-900 border border-white/10 hover:border-white/30 text-zinc-300 hover:text-white text-xs font-mono transition-all"
+            className="btn-neon-white flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-zinc-900 border border-white/10 text-zinc-300 hover:text-white text-xs font-mono"
             aria-label="Back to top"
           >
             <span>TOP</span>
             <FiArrowUp size={13} />
-          </motion.button>
+          </button>
         </div>
 
         {/* Bottom Line */}
