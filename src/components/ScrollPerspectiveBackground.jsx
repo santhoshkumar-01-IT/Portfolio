@@ -1,47 +1,134 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 export default function ScrollPerspectiveBackground() {
-  const [scrollY, setScrollY] = useState(0)
-  const animFrameRef = useRef(null)
-  const currentPosRef = useRef(0)
-  const targetPosRef = useRef(0)
+  const canvasRef = useRef(null)
+  const scrollYRef = useRef(0)
+  const currentScrollRef = useRef(0)
 
   useEffect(() => {
     const handleScroll = () => {
-      targetPosRef.current = window.scrollY
+      scrollYRef.current = window.scrollY
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
 
-    // Smooth continuous animation loop with lerp (no glitch, butter-smooth 60/120fps)
-    const updateMotion = () => {
-      // Smooth interpolation
-      currentPosRef.current += (targetPosRef.current - currentPosRef.current) * 0.08
-      
-      // Auto idle movement + scroll driven translation
-      setScrollY(currentPosRef.current)
-      animFrameRef.current = requestAnimationFrame(updateMotion)
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext('2d')
+    let animationFrameId
+
+    let width = (canvas.width = window.innerWidth)
+    let height = (canvas.height = window.innerHeight)
+
+    let continuousTime = 0
+
+    const render = () => {
+      // Smooth lerp scroll position
+      currentScrollRef.current += (scrollYRef.current - currentScrollRef.current) * 0.08
+      continuousTime += 0.008 // subtle continuous forward idle drift
+
+      ctx.clearRect(0, 0, width, height)
+
+      // 3D Camera & Perspective Parameters
+      const horizonY = height * 0.50 // Horizon where chessboard meets deep black
+      const fovDistance = 450 // Perspective focal length
+      const cameraHeight = 160 // Height of camera above the chessboard floor
+      const tileSize = 120 // Tile width in world units
+
+      // Total forward progress in tile units
+      const totalProgress = (currentScrollRef.current * 0.005) + continuousTime
+      const offset = totalProgress % 1
+      const baseRow = Math.floor(totalProgress)
+
+      const numRows = 45 // Depth rows receding into distance
+      const numCols = 32 // Columns spread across width
+
+      ctx.save()
+
+      // Render from back (horizon) to front (bottom of screen)
+      for (let r = numRows; r >= 1; r--) {
+        const zNear = r - offset
+        const zFar = r + 1 - offset
+
+        if (zNear <= 0.1) continue
+
+        // Perspective Y projection
+        const yNear = horizonY + (cameraHeight * fovDistance) / zNear
+        const yFar = horizonY + (cameraHeight * fovDistance) / zFar
+
+        // Alpha fade into deep darkness towards horizon
+        const depthFactor = Math.min(1, Math.max(0, (numRows - r) / (numRows * 0.75)))
+        const rowAlpha = Math.pow(depthFactor, 1.8)
+
+        if (rowAlpha <= 0.01) continue
+
+        for (let c = -numCols; c < numCols; c++) {
+          // Perspective X projection
+          const xNearLeft = width / 2 + ((c * tileSize) * fovDistance) / zNear
+          const xNearRight = width / 2 + (((c + 1) * tileSize) * fovDistance) / zNear
+
+          const xFarLeft = width / 2 + ((c * tileSize) * fovDistance) / zFar
+          const xFarRight = width / 2 + (((c + 1) * tileSize) * fovDistance) / zFar
+
+          // Determine alternating chessboard pattern
+          // (column index + row index + base row) parity
+          const isWhite = Math.abs((c + r + baseRow) % 2) === 1
+
+          ctx.beginPath()
+          ctx.moveTo(xNearLeft, yNear)
+          ctx.lineTo(xNearRight, yNear)
+          ctx.lineTo(xFarRight, yFar)
+          ctx.lineTo(xFarLeft, yFar)
+          ctx.closePath()
+
+          if (isWhite) {
+            ctx.fillStyle = `rgba(245, 245, 248, ${0.9 * rowAlpha})`
+          } else {
+            ctx.fillStyle = `rgba(8, 8, 10, ${0.98 * rowAlpha})`
+          }
+          ctx.fill()
+
+          // Crisp tile border grid line
+          ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 * rowAlpha})`
+          ctx.lineWidth = 0.5
+          ctx.stroke()
+        }
+      }
+
+      // Soft fog horizon fade gradient to blend seamlessly into pitch black
+      const fogGradient = ctx.createLinearGradient(0, horizonY - 80, 0, horizonY + 120)
+      fogGradient.addColorStop(0, 'rgba(5, 5, 5, 1)')
+      fogGradient.addColorStop(0.4, 'rgba(5, 5, 5, 0.95)')
+      fogGradient.addColorStop(0.8, 'rgba(5, 5, 5, 0.3)')
+      fogGradient.addColorStop(1, 'rgba(5, 5, 5, 0)')
+
+      ctx.fillStyle = fogGradient
+      ctx.fillRect(0, horizonY - 80, width, 200)
+
+      ctx.restore()
+
+      animationFrameId = requestAnimationFrame(render)
     }
 
-    animFrameRef.current = requestAnimationFrame(updateMotion)
+    render()
+
+    const handleResize = () => {
+      width = canvas.width = window.innerWidth
+      height = canvas.height = window.innerHeight
+    }
+
+    window.addEventListener('resize', handleResize)
 
     return () => {
       window.removeEventListener('scroll', handleScroll)
-      if (animFrameRef.current) {
-        cancelAnimationFrame(animFrameRef.current)
-      }
+      window.removeEventListener('resize', handleResize)
+      cancelAnimationFrame(animationFrameId)
     }
   }, [])
 
-  // Calculate seamless continuous tile offset
-  const gridOffset = (scrollY * 0.45) % 120
-
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#050505]">
-      {/* 
-        Layer 1: Seamless Aesthetic Topographic Map (Image 2)
-        Covering full viewport with fixed attachment to eliminate any tile seams
-      */}
+      {/* Layer 1: Seamless Topographic Contours Texture (Image 2) */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.14] mix-blend-screen pointer-events-none"
         style={{
@@ -50,44 +137,13 @@ export default function ScrollPerspectiveBackground() {
         }}
       />
 
-      {/* Layer 2: Subtle vignette gradient uniting the top and bottom seamlessly */}
+      {/* Layer 2: Subtle radial vignette */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(5,5,5,0.6)_60%,rgba(5,5,5,0.98)_100%)] pointer-events-none" />
 
-      {/* 
-        Layer 3: 3D Perspective Checkerboard Floor (Image 1)
-        Hardware-accelerated CSS 3D plane with infinite seamless tiling & zero glitch
-      */}
-      <div 
-        className="absolute bottom-0 left-0 right-0 w-full h-[58vh] overflow-hidden pointer-events-none"
-        style={{
-          perspective: '420px',
-          perspectiveOrigin: '50% 0%',
-          maskImage: 'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 45%, rgba(0,0,0,0) 92%)',
-          WebkitMaskImage: 'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 45%, rgba(0,0,0,0) 92%)',
-        }}
-      >
-        <div 
-          className="w-[240vw] h-[200vh] -ml-[70vw] origin-top"
-          style={{
-            transform: 'rotateX(76deg) translateZ(0)',
-            transformStyle: 'preserve-3d',
-            backgroundImage: `
-              linear-gradient(45deg, #f4f4f5 25%, transparent 25%), 
-              linear-gradient(-45deg, #f4f4f5 25%, transparent 25%), 
-              linear-gradient(45deg, transparent 75%, #f4f4f5 75%), 
-              linear-gradient(-45deg, transparent 75%, #f4f4f5 75%)
-            `,
-            backgroundSize: '120px 120px',
-            backgroundColor: '#0a0a0c',
-            backgroundPosition: `0px ${gridOffset}px, 60px ${gridOffset}px, 60px ${gridOffset - 60}px, 0px ${gridOffset + 60}px`,
-            opacity: 0.88,
-          }}
-        />
-      </div>
-
-      {/* Horizon softening fog to blend floor and background into one single aesthetic plane */}
-      <div 
-        className="absolute bottom-[48vh] left-0 right-0 h-32 pointer-events-none bg-gradient-to-t from-transparent via-[#050505]/80 to-[#050505]"
+      {/* Layer 3: True 3D Chessboard Perspective Canvas */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 w-full h-full pointer-events-none"
       />
     </div>
   )
