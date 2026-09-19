@@ -30,26 +30,26 @@ export default function Navigation() {
       transition={{ duration: 0.5 }}
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-tech-bg/90 backdrop-blur-md border-b border-tech-border/80 shadow-lg shadow-black/60'
+          ? 'bg-tech-bg/85 backdrop-blur-md border-b border-white/[0.08] shadow-lg shadow-black/80'
           : 'bg-transparent border-b border-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 sm:h-20">
-          {/* Logo / Terminal Tag */}
+          {/* Minimalist Logo */}
           <motion.a
             href="#home"
             whileHover={{ scale: 1.02 }}
-            className="group flex items-center gap-2 font-mono text-lg font-bold text-white tracking-tight"
+            className="group flex items-center gap-2.5 font-mono text-base font-semibold text-white tracking-tight"
           >
-            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-tech-card border border-tech-crimson/30 text-tech-crimson group-hover:border-tech-crimson group-hover:shadow-[0_0_15px_rgba(255,42,95,0.45)] transition-all">
-              <FiTerminal className="w-4 h-4" />
+            <div className="flex items-center justify-center w-7 h-7 rounded-md bg-zinc-900 border border-white/10 text-white group-hover:border-white/40 group-hover:bg-zinc-800 transition-all">
+              <FiTerminal className="w-3.5 h-3.5" />
             </div>
-            <span>
-              <span className="text-tech-crimson">&lt;</span>
-              <span className="text-slate-100 group-hover:text-tech-crimson transition-colors">santhosh</span>
-              <span className="text-tech-ruby">.dev</span>
-              <span className="text-tech-crimson"> /&gt;</span>
+            <span className="tracking-tight">
+              <span className="text-zinc-400">&lt;</span>
+              <span className="text-white font-medium">santhosh</span>
+              <span className="text-zinc-400">.dev</span>
+              <span className="text-zinc-400"> /&gt;</span>
             </span>
           </motion.a>
 
@@ -59,26 +59,26 @@ export default function Navigation() {
               <a
                 key={item.name}
                 href={item.href}
-                className="group px-3 py-1.5 rounded-md text-xs font-mono text-slate-300 hover:text-tech-crimson hover:bg-tech-card/70 transition-all duration-200"
+                className="group px-3 py-1.5 rounded-md text-xs font-mono text-zinc-400 hover:text-white hover:bg-zinc-900/60 transition-all duration-200"
               >
-                <span className="text-tech-crimson/60 group-hover:text-tech-crimson mr-1 font-semibold">{item.num}.</span>
-                <span className="font-sans text-sm">{item.name}</span>
+                <span className="text-zinc-500 group-hover:text-zinc-300 mr-1.5 font-normal">{item.num}.</span>
+                <span className="font-sans text-sm font-medium">{item.name}</span>
               </a>
             ))}
           </div>
 
           {/* Status & CTA Badge */}
           <div className="hidden lg:flex items-center gap-4">
-            <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-tech-card/80 border border-tech-emerald/30 text-[11px] font-mono text-slate-300">
-              <span className="w-2 h-2 rounded-full bg-tech-emerald animate-ping" />
-              <span className="text-tech-emerald font-semibold">● Ready to Code</span>
+            <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900/80 border border-white/10 text-[11px] font-mono text-zinc-300">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-zinc-300">Available for hire</span>
             </div>
             
             <motion.a
               href="#contact"
-              whileHover={{ scale: 1.03 }}
+              whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="px-4 py-1.5 rounded-lg font-mono text-xs font-semibold bg-tech-crimson/10 border border-tech-crimson/40 text-tech-crimson hover:bg-tech-crimson hover:text-white transition-all duration-200 shadow-sm shadow-tech-crimson/20"
+              className="px-3.5 py-1.5 rounded-md font-mono text-xs font-semibold bg-white text-black hover:bg-zinc-200 transition-all duration-200 shadow-sm"
             >
               Get In Touch
             </motion.a>
@@ -88,10 +88,10 @@ export default function Navigation() {
           <div className="flex items-center md:hidden gap-2">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-lg bg-tech-card border border-tech-border text-slate-300 hover:text-tech-crimson focus:outline-none"
+              className="p-2 rounded-lg bg-zinc-900 border border-white/10 text-zinc-300 hover:text-white focus:outline-none"
               aria-label="Toggle Navigation"
             >
-              {isOpen ? <FiX size={20} /> : <FiMenu size={20} />}
+              {isOpen ? <FiX size={18} /> : <FiMenu size={18} />}
             </button>
           </div>
         </div>
@@ -104,27 +104,27 @@ export default function Navigation() {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.25 }}
-              className="md:hidden border-t border-tech-border/80 bg-tech-card/95 backdrop-blur-xl px-4 py-4 rounded-b-2xl shadow-xl space-y-2 font-mono text-sm"
+              className="md:hidden border-t border-white/10 bg-zinc-950/95 backdrop-blur-xl px-4 py-4 rounded-b-xl shadow-2xl space-y-2 font-mono text-sm"
             >
               {navItems.map((item) => (
                 <a
                   key={item.name}
                   href={item.href}
-                  className="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-300 hover:text-tech-crimson hover:bg-tech-surface transition-colors"
+                  className="flex items-center gap-2 px-3 py-2 rounded-lg text-zinc-300 hover:text-white hover:bg-zinc-900 transition-colors"
                   onClick={() => setIsOpen(false)}
                 >
-                  <span className="text-tech-crimson font-bold">{item.num}.</span>
+                  <span className="text-zinc-500 font-bold">{item.num}.</span>
                   <span className="font-sans font-medium">{item.name}</span>
                 </a>
               ))}
-              <div className="pt-2 border-t border-tech-border flex items-center justify-between">
-                <span className="flex items-center gap-1.5 text-xs text-tech-emerald font-mono">
-                  <span className="w-2 h-2 rounded-full bg-tech-emerald inline-block" /> Available for Roles
+              <div className="pt-3 border-t border-white/10 flex items-center justify-between">
+                <span className="flex items-center gap-1.5 text-xs text-emerald-400 font-mono">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block" /> Available
                 </span>
                 <a
                   href="#contact"
                   onClick={() => setIsOpen(false)}
-                  className="px-3 py-1.5 rounded bg-tech-crimson text-white text-xs font-mono font-bold"
+                  className="px-3 py-1.5 rounded bg-white text-black text-xs font-mono font-semibold"
                 >
                   Contact Me
                 </a>

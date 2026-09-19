@@ -13,18 +13,16 @@ export default function ParticleBackground() {
     let height = (canvas.height = window.innerHeight)
 
     const particles = []
-    const particleCount = Math.min(Math.floor((width * height) / 18000), 65)
+    const particleCount = Math.min(Math.floor((width * height) / 20000), 55)
 
-    class DataNode {
+    class MonochromaticNode {
       constructor() {
         this.x = Math.random() * width
         this.y = Math.random() * height
-        this.size = Math.random() * 1.5 + 1
-        this.speedX = (Math.random() - 0.5) * 0.4
-        this.speedY = (Math.random() - 0.5) * 0.4
-        // Crimson (348) or Ruby/Rose (330)
-        this.hue = Math.random() > 0.4 ? '348, 100%, 58%' : '330, 85%, 60%'
-        this.alpha = Math.random() * 0.5 + 0.2
+        this.size = Math.random() * 1.4 + 0.6
+        this.speedX = (Math.random() - 0.5) * 0.3
+        this.speedY = (Math.random() - 0.5) * 0.3
+        this.alpha = Math.random() * 0.45 + 0.15
       }
 
       update() {
@@ -38,7 +36,7 @@ export default function ParticleBackground() {
       }
 
       draw() {
-        ctx.fillStyle = `hsla(${this.hue}, ${this.alpha})`
+        ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`
         ctx.beginPath()
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
         ctx.fill()
@@ -46,11 +44,11 @@ export default function ParticleBackground() {
     }
 
     for (let i = 0; i < particleCount; i++) {
-      particles.push(new DataNode())
+      particles.push(new MonochromaticNode())
     }
 
     const connectNodes = () => {
-      const maxDistance = 120
+      const maxDistance = 110
       for (let a = 0; a < particles.length; a++) {
         for (let b = a + 1; b < particles.length; b++) {
           const dx = particles[a].x - particles[b].x
@@ -58,9 +56,9 @@ export default function ParticleBackground() {
           const dist = Math.sqrt(dx * dx + dy * dy)
 
           if (dist < maxDistance) {
-            const opacity = (1 - dist / maxDistance) * 0.15
-            ctx.strokeStyle = `rgba(244, 63, 94, ${opacity})`
-            ctx.lineWidth = 0.75
+            const opacity = (1 - dist / maxDistance) * 0.08
+            ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`
+            ctx.lineWidth = 0.6
             ctx.beginPath()
             ctx.moveTo(particles[a].x, particles[a].y)
             ctx.lineTo(particles[b].x, particles[b].y)
@@ -73,7 +71,6 @@ export default function ParticleBackground() {
     const render = () => {
       ctx.clearRect(0, 0, width, height)
       
-      // Connect and draw particles
       connectNodes()
       particles.forEach((p) => {
         p.update()
@@ -99,7 +96,7 @@ export default function ParticleBackground() {
 
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-      <div className="absolute inset-0 bg-tech-grid opacity-60" />
+      <div className="absolute inset-0 bg-tech-grid opacity-70" />
       <canvas ref={canvasRef} className="absolute inset-0" />
     </div>
   )
