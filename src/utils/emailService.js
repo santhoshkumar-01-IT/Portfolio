@@ -1,25 +1,41 @@
-// Email service integration using EmailJS
-// Sign up at https://www.emailjs.com to get your credentials
+// Real email dispatch service connected to FormSubmit
+// Directs all portfolio contact form inquiries to santhoshkumaroffc@gmail.com
 
-const SERVICE_ID = 'service_78xzo0a'
-const TEMPLATE_ID = 'template_mxu8616'
-const PUBLIC_KEY = 'jC-UuZl1XWdtvQm83'
+const DESTINATION_EMAIL = 'santhoshkumaroffc@gmail.com'
 
-export const sendEmail = async (formData) => {
+export const sendEmail = async ({ name, email, subject, message }) => {
   try {
-    // Initialize EmailJS (if using)
-    // emailjs.init(PUBLIC_KEY)
+    const response = await fetch(`https://formsubmit.co/ajax/${DESTINATION_EMAIL}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        _subject: `[Portfolio Inquiry] ${subject || 'New Contact Request'} - from ${name}`,
+        message: message,
+        _template: 'table',
+        _captcha: 'false',
+      }),
+    })
 
-    // For now, log the data
-    console.log('Email would be sent with:', formData)
+    const data = await response.json()
 
-    // TODO: Integrate EmailJS or your backend email service
-    // const response = await emailjs.send(SERVICE_ID, TEMPLATE_ID, formData)
-    // return response
-
-    return { success: true, message: 'Email sent successfully' }
+    if (response.ok && (data.success === 'true' || data.success === true)) {
+      return { success: true, message: 'Message delivered to email inbox successfully.' }
+    } else {
+      return {
+        success: false,
+        error: data.message || 'Failed to dispatch email. Please reach out directly.',
+      }
+    }
   } catch (error) {
-    console.error('Email sending error:', error)
-    return { success: false, error: error.message }
+    console.error('Email dispatch error:', error)
+    return {
+      success: false,
+      error: error.message || 'Network error occurred while sending email.',
+    }
   }
 }

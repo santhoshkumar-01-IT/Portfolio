@@ -1,12 +1,15 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { useState } from 'react'
-import { FiMail, FiPhone, FiMapPin, FiSend, FiTerminal, FiCheckCircle } from 'react-icons/fi'
+import { FiMail, FiPhone, FiMapPin, FiSend, FiTerminal, FiCheckCircle, FiAlertCircle, FiLoader, FiExternalLink } from 'react-icons/fi'
+import { sendEmail } from '../utils/emailService'
 
 export default function Contact() {
   const { ref, inView } = useInView({ threshold: 0.2, triggerOnce: true })
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' })
+  const [loading, setLoading] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('')
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -15,11 +18,26 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log('Form submitted:', formData)
-    setSubmitted(true)
-    setFormData({ name: '', email: '', subject: '', message: '' })
-    setTimeout(() => setSubmitted(false), 4000)
+    setLoading(true)
+    setErrorMsg('')
+
+    const result = await sendEmail(formData)
+    setLoading(false)
+
+    if (result.success) {
+      setSubmitted(true)
+      setFormData({ name: '', email: '', subject: '', message: '' })
+      setTimeout(() => setSubmitted(false), 6000)
+    } else {
+      setErrorMsg(result.error || 'Failed to dispatch email.')
+    }
   }
+
+  const fallbackMailto = `mailto:santhoshkumaroffc@gmail.com?subject=${encodeURIComponent(
+    formData.subject || 'Portfolio Inquiry'
+  )}&body=${encodeURIComponent(
+    `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+  )}`
 
   return (
     <section
@@ -57,7 +75,7 @@ export default function Contact() {
                   <span>Direct Channels</span>
                 </h3>
                 <p className="text-xs text-zinc-400 mt-1 font-normal">
-                  Available for software roles, collaborations, and architectural discussions.
+                  Available for full-time opportunities, collaborations, and engineering discussions.
                 </p>
               </div>
 
@@ -105,6 +123,18 @@ export default function Contact() {
                   </p>
                 </div>
               </div>
+
+              {/* Direct Mail Client CTA */}
+              <div className="pt-2 border-t border-white/[0.08]">
+                <a
+                  href="mailto:santhoshkumaroffc@gmail.com"
+                  className="btn-neon-white w-full py-2.5 px-3 rounded-md bg-zinc-900/90 border border-white/15 text-zinc-300 hover:text-white font-mono text-xs flex items-center justify-center gap-2"
+                >
+                  <FiMail size={14} />
+                  <span>Open Mail App Directly</span>
+                  <FiExternalLink size={12} className="text-zinc-500" />
+                </a>
+              </div>
             </div>
           </motion.div>
 
@@ -122,13 +152,13 @@ export default function Contact() {
                   <div className="w-2.5 h-2.5 rounded-full bg-zinc-700" />
                   <div className="w-2.5 h-2.5 rounded-full bg-zinc-700" />
                   <div className="w-2.5 h-2.5 rounded-full bg-zinc-700" />
-                  <span className="ml-2 text-zinc-300">POST /api/v1/contact</span>
+                  <span className="ml-2 text-zinc-400">POST /api/v1/contact</span>
                 </div>
-                <span className="text-zinc-400">SSL Encrypted</span>
+                <div className="text-[11px] text-zinc-500 font-mono">TLS Encrypted</div>
               </div>
 
               {/* Form Body */}
-              <form onSubmit={handleSubmit} className="p-6 sm:p-7 space-y-4">
+              <form onSubmit={handleSubmit} className="p-6 sm:p-8 space-y-4">
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-mono text-zinc-400 mb-1.5">
@@ -141,9 +171,11 @@ export default function Contact() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-3.5 py-2.5 rounded-md bg-zinc-900/90 border border-white/10 text-white text-sm font-sans placeholder-zinc-500 focus:outline-none focus:border-white focus:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all"
+                      disabled={loading}
+                      className="w-full px-3.5 py-2.5 rounded-md bg-zinc-900/90 border border-white/10 text-white text-sm font-sans placeholder-zinc-500 focus:outline-none focus:border-white focus:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all disabled:opacity-50"
                     />
                   </div>
+
                   <div>
                     <label className="block text-xs font-mono text-zinc-400 mb-1.5">
                       // sender.email *
@@ -155,7 +187,8 @@ export default function Contact() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-3.5 py-2.5 rounded-md bg-zinc-900/90 border border-white/10 text-white text-sm font-sans placeholder-zinc-500 focus:outline-none focus:border-white focus:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all"
+                      disabled={loading}
+                      className="w-full px-3.5 py-2.5 rounded-md bg-zinc-900/90 border border-white/10 text-white text-sm font-sans placeholder-zinc-500 focus:outline-none focus:border-white focus:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all disabled:opacity-50"
                     />
                   </div>
                 </div>
@@ -167,11 +200,12 @@ export default function Contact() {
                   <input
                     type="text"
                     name="subject"
-                    placeholder="Project Inquiry / Full Stack Role"
+                    placeholder="Project Inquiry / Job Opportunity"
                     value={formData.subject}
                     onChange={handleChange}
                     required
-                    className="w-full px-3.5 py-2.5 rounded-md bg-zinc-900/90 border border-white/10 text-white text-sm font-sans placeholder-zinc-500 focus:outline-none focus:border-white focus:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all"
+                    disabled={loading}
+                    className="w-full px-3.5 py-2.5 rounded-md bg-zinc-900/90 border border-white/10 text-white text-sm font-sans placeholder-zinc-500 focus:outline-none focus:border-white focus:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all disabled:opacity-50"
                   />
                 </div>
 
@@ -185,19 +219,50 @@ export default function Contact() {
                     value={formData.message}
                     onChange={handleChange}
                     required
+                    disabled={loading}
                     rows="4"
-                    className="w-full px-3.5 py-2.5 rounded-md bg-zinc-900/90 border border-white/10 text-white text-sm font-sans placeholder-zinc-500 focus:outline-none focus:border-white focus:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all resize-none"
+                    className="w-full px-3.5 py-2.5 rounded-md bg-zinc-900/90 border border-white/10 text-white text-sm font-sans placeholder-zinc-500 focus:outline-none focus:border-white focus:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all resize-none disabled:opacity-50"
                   />
                 </div>
 
+                {/* Error Banner with 1-click fallback */}
+                {errorMsg && (
+                  <div className="p-3 rounded-md bg-red-950/40 border border-red-500/30 text-red-300 text-xs font-mono flex items-start justify-between gap-2">
+                    <div className="flex items-start gap-2">
+                      <FiAlertCircle className="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5" />
+                      <span>{errorMsg}</span>
+                    </div>
+                    <a
+                      href={fallbackMailto}
+                      className="underline text-white hover:text-red-200 flex-shrink-0"
+                    >
+                      Send via Mail App
+                    </a>
+                  </div>
+                )}
+
+                {/* Success Banner */}
+                {submitted && (
+                  <div className="p-3 rounded-md bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 text-xs font-mono flex items-center gap-2">
+                    <FiCheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                    <span>Message dispatched successfully to santhoshkumaroffc@gmail.com!</span>
+                  </div>
+                )}
+
                 <button
                   type="submit"
-                  className="btn-neon-solid w-full py-3 rounded-md font-mono font-semibold text-xs flex items-center justify-center gap-2"
+                  disabled={loading || submitted}
+                  className="btn-neon-solid w-full py-3 rounded-md font-mono font-semibold text-xs flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer"
                 >
-                  {submitted ? (
+                  {loading ? (
+                    <>
+                      <FiLoader className="text-black text-sm animate-spin" />
+                      <span>Transmitting Message...</span>
+                    </>
+                  ) : submitted ? (
                     <>
                       <FiCheckCircle className="text-black text-sm" />
-                      <span>Message Dispatched Successfully!</span>
+                      <span>Message Dispatched!</span>
                     </>
                   ) : (
                     <>
