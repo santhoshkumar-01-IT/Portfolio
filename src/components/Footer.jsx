@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { FiArrowUp } from 'react-icons/fi'
-import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa'
-import { SiLeetcode } from 'react-icons/si'
+import { FaGithub, FaLinkedin } from 'react-icons/fa'
+import { SiStreamlit, SiVercel } from 'react-icons/si'
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -10,9 +10,9 @@ export default function Footer() {
 
   const socialLinks = [
     { icon: <FaGithub size={16} />, url: 'https://github.com/santhoshkumar-01-IT', label: 'GitHub' },
-    { icon: <FaLinkedin size={16} />, url: 'https://linkedin.com', label: 'LinkedIn' },
-    { icon: <SiLeetcode size={16} />, url: 'https://leetcode.com', label: 'LeetCode' },
-    { icon: <FaTwitter size={16} />, url: 'https://twitter.com', label: 'Twitter' },
+    { icon: <FaLinkedin size={16} />, url: 'https://www.linkedin.com/in/santhoshkumar2007', label: 'LinkedIn' },
+    { icon: <SiStreamlit size={16} />, url: 'https://ml-career-recommender.streamlit.app', label: 'Streamlit' },
+    { icon: <SiVercel size={15} />, url: 'https://portfolio-sigma-five-nj4551y519.vercel.app', label: 'Vercel' },
   ]
 
   return (
