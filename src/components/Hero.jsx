@@ -74,7 +74,7 @@ export default function Hero() {
               </h1>
               <div className="flex items-center gap-3 pt-2">
                 <span className="text-xl sm:text-2xl lg:text-3xl font-semibold text-zinc-300">
-                  Software Engineer & Full Stack Builder
+                  Software Web Developer & MERN Stack Developer
                 </span>
               </div>
             </motion.div>
@@ -156,7 +156,7 @@ export default function Hero() {
               {/* Code Editor Body */}
               <div className="p-5 font-mono text-xs sm:text-sm leading-relaxed overflow-x-auto text-zinc-300 bg-[#080808]">
                 <p className="text-zinc-400 italic mb-2">
-                  // Software Engineer Profile Specification
+                  // Software Web Developer & MERN Stack Developer Profile
                 </p>
                 
                 <p>
@@ -172,7 +172,7 @@ export default function Hero() {
                   </p>
                   <p>
                     <span className="text-zinc-400">role:</span>{' '}
-                    <span className="text-zinc-200">'Software Engineer'</span>,
+                    <span className="text-zinc-200">'Software Web Developer & MERN Stack Developer'</span>,
                   </p>
                   <p>
                     <span className="text-zinc-400">status:</span>{' '}

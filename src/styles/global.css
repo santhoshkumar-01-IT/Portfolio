@@ -124,3 +124,122 @@ body {
 .code-font {
   font-family: 'JetBrains Mono', monospace;
 }
+
+/* ─── Monochrome Photo Showcase ─── */
+.photo-frame-neon {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.photo-frame-neon::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  border: 1px solid transparent;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent 40%, transparent 60%, rgba(255,255,255,0.2)) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  transition: all 0.5s ease;
+  z-index: 10;
+}
+
+.photo-frame-neon:hover {
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 
+    0 0 20px rgba(255, 255, 255, 0.4),
+    0 0 40px rgba(255, 255, 255, 0.15),
+    0 0 60px rgba(255, 255, 255, 0.08),
+    inset 0 0 30px rgba(255, 255, 255, 0.05);
+  transform: translateY(-4px);
+}
+
+.photo-frame-neon:hover::before {
+  background: linear-gradient(135deg, rgba(255,255,255,0.6), transparent 30%, transparent 70%, rgba(255,255,255,0.6)) border-box;
+}
+
+/* Monochrome filter with hover reveal */
+.photo-mono {
+  filter: grayscale(1) contrast(1.15) brightness(1.05);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.photo-mono:hover {
+  filter: grayscale(0.3) contrast(1.1) brightness(1.08);
+  transform: scale(1.03);
+}
+
+/* Animated scan line overlay */
+.photo-scanline::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 255, 255, 0.015) 2px,
+    rgba(255, 255, 255, 0.015) 4px
+  );
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* Floating label tag */
+.photo-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem 1rem 1rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 5;
+}
+
+.photo-frame-neon:hover .photo-label {
+  transform: translateY(0);
+}
+
+/* Corner brackets decoration */
+.corner-bracket {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.corner-bracket::before,
+.corner-bracket::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  transition: all 0.4s ease;
+}
+
+.corner-bracket::before {
+  top: 8px;
+  left: 8px;
+  border-left: 2px solid rgba(255, 255, 255, 0.25);
+  border-top: 2px solid rgba(255, 255, 255, 0.25);
+}
+
+.corner-bracket::after {
+  bottom: 8px;
+  right: 8px;
+  border-right: 2px solid rgba(255, 255, 255, 0.25);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.25);
+}
+
+.photo-frame-neon:hover .corner-bracket::before,
+.photo-frame-neon:hover .corner-bracket::after {
+  border-color: rgba(255, 255, 255, 0.7);
+  width: 28px;
+  height: 28px;
+}

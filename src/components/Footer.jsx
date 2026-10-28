@@ -29,7 +29,7 @@ export default function Footer() {
               <span className="text-zinc-500"> /&gt;</span>
             </div>
             <p className="text-zinc-400 text-xs font-mono">
-              Software Engineer • Architecting Scalable & Performant Web Applications
+              Software Web Developer & MERN Stack Developer • Architecting Scalable & Performant Web Applications
             </p>
           </div>
 
