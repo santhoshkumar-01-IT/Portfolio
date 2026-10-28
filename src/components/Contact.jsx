@@ -1,12 +1,12 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { useState } from 'react'
-import { FiMail, FiPhone, FiMapPin, FiSend, FiTerminal, FiCheckCircle, FiAlertCircle, FiLoader, FiExternalLink } from 'react-icons/fi'
+import { FiMail, FiPhone, FiMapPin, FiSend, FiTerminal, FiCheckCircle, FiAlertCircle, FiLoader, FiExternalLink, FiShield } from 'react-icons/fi'
 import { sendEmail } from '../utils/emailService'
 
 export default function Contact() {
   const { ref, inView } = useInView({ threshold: 0.2, triggerOnce: true })
-  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' })
+  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '', honeypot: '' })
   const [loading, setLoading] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
@@ -26,7 +26,7 @@ export default function Contact() {
 
     if (result.success) {
       setSubmitted(true)
-      setFormData({ name: '', email: '', subject: '', message: '' })
+      setFormData({ name: '', email: '', subject: '', message: '', honeypot: '' })
       setTimeout(() => setSubmitted(false), 6000)
     } else {
       setErrorMsg(result.error || 'Failed to dispatch email.')
@@ -154,11 +154,28 @@ export default function Contact() {
                   <div className="w-2.5 h-2.5 rounded-full bg-zinc-700" />
                   <span className="ml-2 text-zinc-400">POST /api/v1/contact</span>
                 </div>
-                <div className="text-[11px] text-zinc-500 font-mono">TLS Encrypted</div>
+                <div className="flex items-center gap-1.5 text-[11px] text-zinc-400 font-mono">
+                  <FiShield className="text-emerald-400 w-3 h-3" />
+                  <span>HSTS • TLS Encrypted</span>
+                </div>
               </div>
 
               {/* Form Body */}
-              <form onSubmit={handleSubmit} className="p-6 sm:p-8 space-y-4">
+              <form onSubmit={handleSubmit} className="p-6 sm:p-8 space-y-4" noValidate={false}>
+                {/* Honeypot field - invisible to real humans, catches spam bots */}
+                <div className="hidden" aria-hidden="true" style={{ display: 'none' }}>
+                  <label htmlFor="hp_field">Do not fill this field</label>
+                  <input
+                    type="text"
+                    id="hp_field"
+                    name="honeypot"
+                    value={formData.honeypot}
+                    onChange={handleChange}
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
+
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-mono text-zinc-400 mb-1.5">
@@ -170,6 +187,8 @@ export default function Contact() {
                       placeholder="e.g. Alex Morgan"
                       value={formData.name}
                       onChange={handleChange}
+                      maxLength={100}
+                      autoComplete="name"
                       required
                       disabled={loading}
                       className="w-full px-3.5 py-2.5 rounded-md bg-zinc-900/90 border border-white/10 text-white text-sm font-sans placeholder-zinc-500 focus:outline-none focus:border-white focus:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all disabled:opacity-50"
@@ -186,6 +205,8 @@ export default function Contact() {
                       placeholder="alex@company.com"
                       value={formData.email}
                       onChange={handleChange}
+                      maxLength={120}
+                      autoComplete="email"
                       required
                       disabled={loading}
                       className="w-full px-3.5 py-2.5 rounded-md bg-zinc-900/90 border border-white/10 text-white text-sm font-sans placeholder-zinc-500 focus:outline-none focus:border-white focus:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all disabled:opacity-50"
@@ -203,6 +224,7 @@ export default function Contact() {
                     placeholder="Project Inquiry / Job Opportunity"
                     value={formData.subject}
                     onChange={handleChange}
+                    maxLength={150}
                     required
                     disabled={loading}
                     className="w-full px-3.5 py-2.5 rounded-md bg-zinc-900/90 border border-white/10 text-white text-sm font-sans placeholder-zinc-500 focus:outline-none focus:border-white focus:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all disabled:opacity-50"
@@ -218,6 +240,7 @@ export default function Contact() {
                     placeholder="Write your message or project details here..."
                     value={formData.message}
                     onChange={handleChange}
+                    maxLength={2000}
                     required
                     disabled={loading}
                     rows="4"
