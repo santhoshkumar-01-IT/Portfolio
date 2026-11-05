@@ -1,72 +1,37 @@
-import { motion } from 'framer-motion'
 import { FiArrowUp } from 'react-icons/fi'
-import { FaGithub, FaLinkedin } from 'react-icons/fa'
-import { SiStreamlit, SiVercel } from 'react-icons/si'
 
 export default function Footer() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  const socialLinks = [
-    { icon: <FaGithub size={16} />, url: 'https://github.com/santhoshkumar-01-IT', label: 'GitHub' },
-    { icon: <FaLinkedin size={16} />, url: 'https://www.linkedin.com/in/santhoshkumar2007', label: 'LinkedIn' },
-    { icon: <SiStreamlit size={16} />, url: 'https://ml-career-recommender.streamlit.app', label: 'Streamlit' },
-    { icon: <SiVercel size={15} />, url: 'https://portfolio-sigma-five-nj4551y519.vercel.app', label: 'Vercel' },
-  ]
-
   return (
-    <footer className="bg-tech-bg border-t border-white/[0.08] relative z-10">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-          
-          {/* Left: Branding & Status */}
-          <div className="text-center md:text-left space-y-1.5">
-            <div className="flex items-center justify-center md:justify-start gap-2 font-mono text-sm font-semibold text-white">
-              <span className="text-zinc-500">&lt;</span>
-              <span>santhosh</span>
-              <span className="text-zinc-400">.dev</span>
-              <span className="text-zinc-500"> /&gt;</span>
-            </div>
-            <p className="text-zinc-400 text-xs font-mono">
-              Software Web Developer & MERN Stack Developer • Architecting Scalable & Performant Web Applications
-            </p>
-          </div>
+    <footer className="mt-16 pt-8 pb-12 border-t border-white/[0.08] relative z-10 text-xs font-mono text-zinc-400">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+        {/* Left: Copyright */}
+        <p className="text-zinc-400 text-center sm:text-left">
+          © 2026 <span className="text-zinc-200 font-semibold">Santhosh Kumar S</span>. All rights reserved.
+        </p>
 
-          {/* Center: Social Links with White Neon Glow */}
-          <div className="flex items-center gap-2.5">
-            {socialLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-neon-white w-9 h-9 rounded-md bg-zinc-900 border border-white/10 flex items-center justify-center text-zinc-300 hover:text-white"
-                title={link.label}
-              >
-                {link.icon}
-              </a>
-            ))}
-          </div>
+        {/* Center: Inspirational prompt */}
+        <p className="text-orange-400/90 text-center hidden md:block font-medium">
+          Let's build something amazing together.
+        </p>
 
-          {/* Right: Scroll to top with White Neon Glow */}
+        {/* Right: Made with orange heart & Top Button */}
+        <div className="flex items-center gap-4">
+          <p className="text-zinc-400">
+            Made with <span className="text-orange-500 animate-pulse inline-block">🧡</span> for the web
+          </p>
+
           <button
             onClick={scrollToTop}
-            className="btn-neon-white flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-zinc-900 border border-white/10 text-zinc-300 hover:text-white text-xs font-mono"
-            aria-label="Back to top"
+            className="w-7 h-7 rounded-lg bg-zinc-900 border border-white/10 flex items-center justify-center text-zinc-400 hover:text-white hover:border-orange-500/50 hover:shadow-[0_0_10px_rgba(255,107,0,0.5)] transition-all cursor-pointer"
+            title="Scroll to Top"
+            aria-label="Back to Top"
           >
-            <span>TOP</span>
             <FiArrowUp size={13} />
           </button>
-        </div>
-
-        {/* Bottom Line */}
-        <div className="mt-8 pt-6 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between text-zinc-400 text-xs font-mono gap-3">
-          <p>© 2026 Santhosh Kumar. All rights reserved.</p>
-          <p className="flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block" />
-            <span>Built with React 19, Tailwind CSS & Vite</span>
-          </p>
         </div>
       </div>
     </footer>

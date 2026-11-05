@@ -8,33 +8,41 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'Fira Code', 'monospace'],
+        handwriting: ['Caveat', 'cursive'],
       },
       colors: {
-        // Aesthetic Monochrome Palette (Vercel / Linear / Apple dark minimalism)
-        'tech-bg': '#050505',
-        'tech-surface': '#0c0c0c',
-        'tech-card': '#121212',
-        'tech-card-hover': '#1a1a1a',
-        'tech-border': '#222222',
-        'tech-border-glow': 'rgba(255, 255, 255, 0.2)',
+        // Cosmic Obsidian & Neon Orange Eclipse Theme
+        'tech-bg': '#070709',
+        'tech-surface': '#0c0c10',
+        'tech-card': '#111116',
+        'tech-card-hover': '#16161d',
+        'tech-border': 'rgba(255, 255, 255, 0.08)',
+        'tech-border-glow': 'rgba(255, 107, 0, 0.35)',
         'tech-white': '#ffffff',
-        'tech-silver': '#e4e4e7',
+        'tech-silver': '#f4f4f5',
         'tech-platinum': '#a1a1aa',
         'tech-muted': '#71717a',
-        'tech-zinc': '#27272a',
-        'tech-emerald': '#10b981', // Subtle online status
-        // Backward compatibility mappings to monochrome tones
-        'dark-bg': '#050505',
-        'dark-card': '#121212',
-        'dark-border': '#222222',
-        'accent-blue': '#ffffff',
-        'accent-purple': '#e4e4e7',
-        'accent-pink': '#a1a1aa',
-        'tech-cyan': '#ffffff',
-        'tech-ruby': '#e4e4e7',
-        'tech-rose': '#a1a1aa',
+        'tech-zinc': '#18181b',
+        'tech-emerald': '#10b981',
+        
+        // Neon Orange / Solar Flare Accents
+        'neon-orange': '#ff6b00',
+        'neon-orange-light': '#ff8533',
+        'neon-amber': '#ff9900',
+        'neon-orange-dark': '#e05300',
+        
+        // Backward compatibility mappings
+        'dark-bg': '#070709',
+        'dark-card': '#111116',
+        'dark-border': 'rgba(255, 255, 255, 0.08)',
+        'accent-blue': '#ff6b00',
+        'accent-purple': '#ff8533',
+        'accent-pink': '#ff9900',
+        'tech-cyan': '#ff6b00',
+        'tech-ruby': '#ff5500',
+        'tech-rose': '#ff7a00',
       },
       animation: {
         float: 'float 4s ease-in-out infinite',

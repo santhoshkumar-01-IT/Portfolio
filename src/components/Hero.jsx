@@ -1,234 +1,169 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { FiArrowDown, FiCode, FiTerminal } from 'react-icons/fi'
-import { SiJavascript, SiReact, SiNodedotjs, SiDocker, SiPostgresql, SiTailwindcss } from 'react-icons/si'
+import { FiArrowRight, FiDownload, FiCode, FiMapPin } from 'react-icons/fi'
+import { FaGraduationCap } from 'react-icons/fa'
 
-export default function Hero() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
-      },
-    },
-  }
+export default function Hero({ onOpenContactModal }) {
+  const roles = [
+    'Full-Stack Developer',
+    'MERN Stack Engineer',
+    'AI/ML Explorer',
+    'Software Engineer'
+  ]
+  const [roleIndex, setRoleIndex] = useState(0)
+  const [displayText, setDisplayText] = useState('')
+  const [isDeleting, setIsDeleting] = useState(false)
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 16 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
-    },
-  }
+  // Smooth typewriter effect for the role title
+  useEffect(() => {
+    const currentFull = roles[roleIndex]
+    const speed = isDeleting ? 40 : 80
 
-  const techBadges = [
-    { name: 'React', icon: <SiReact className="text-zinc-300" /> },
-    { name: 'Node.js', icon: <SiNodedotjs className="text-zinc-300" /> },
-    { name: 'JavaScript', icon: <SiJavascript className="text-zinc-300" /> },
-    { name: 'Tailwind CSS', icon: <SiTailwindcss className="text-zinc-300" /> },
-    { name: 'PostgreSQL', icon: <SiPostgresql className="text-zinc-300" /> },
-    { name: 'Docker', icon: <SiDocker className="text-zinc-300" /> },
+    const timer = setTimeout(() => {
+      if (!isDeleting) {
+        setDisplayText(currentFull.substring(0, displayText.length + 1))
+        if (displayText.length + 1 === currentFull.length) {
+          setTimeout(() => setIsDeleting(true), 1800)
+        }
+      } else {
+        setDisplayText(currentFull.substring(0, displayText.length - 1))
+        if (displayText.length === 0) {
+          setIsDeleting(false)
+          setRoleIndex((prev) => (prev + 1) % roles.length)
+        }
+      }
+    }, speed)
+
+    return () => clearTimeout(timer)
+  }, [displayText, isDeleting, roleIndex])
+
+  const stats = [
+    { icon: <FiCode className="text-orange-400 w-3.5 h-3.5" />, label: '2+ Projects', sub: 'Completed' },
+    { icon: <FaGraduationCap className="text-orange-400 w-3.5 h-3.5" />, label: 'BSc IT', sub: 'Education' },
+    { icon: <FiMapPin className="text-orange-400 w-3.5 h-3.5" />, label: 'Pollachi,', sub: 'India' },
   ]
 
   return (
-    <section
-      id="home"
-      className="min-h-screen flex items-center justify-center relative pt-24 pb-16 overflow-hidden"
-    >
-      {/* Subtle ambient lighting */}
-      <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[350px] bg-white/[0.03] rounded-full blur-[120px]" />
+    <section id="home" className="relative pt-6 pb-12 w-full">
+      {/* Top Bar with Let's Talk Button */}
+      <div className="flex justify-end mb-6">
+        <button
+          onClick={onOpenContactModal}
+          className="btn-glass-pill px-4 py-1.5 text-xs font-semibold flex items-center gap-2 group hover:border-orange-500/60"
+        >
+          <span>Let's Talk</span>
+          <FiArrowRight className="w-3.5 h-3.5 text-orange-400 group-hover:translate-x-0.5 transition-transform" />
+        </button>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 w-full">
-        <div className="grid lg:grid-cols-12 gap-12 items-center">
-          
-          {/* Left Column: Intro & Headline */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="lg:col-span-7 text-left space-y-6"
-          >
-            {/* Terminal command line tag */}
-            <motion.div variants={itemVariants} className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900/90 border border-white/10 text-zinc-300 font-mono text-xs shadow-sm">
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                <span>~/santhosh-kumar &gt; whoami</span>
+      <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+        {/* Left Column: Bio & Headline */}
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="lg:col-span-7 space-y-6"
+        >
+          {/* Greeting Pill */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900/80 border border-white/10 shadow-sm">
+            <span className="text-sm">👋</span>
+            <span className="text-xs font-medium text-zinc-300">Hello, I'm</span>
+          </div>
+
+          {/* Large Name & Typing Role */}
+          <div className="space-y-2">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
+              Santhosh{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-100 to-zinc-300">
+                Kumar S
               </span>
-            </motion.div>
+            </h1>
 
-            {/* Main Headline */}
-            <motion.div variants={itemVariants} className="space-y-2">
-              <h2 className="text-zinc-400 font-mono text-sm sm:text-base">
-                Hello World, I'm
-              </h2>
-              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white">
-                Santhosh{' '}
-                <span className="bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent">
-                  Kumar
-                </span>
-              </h1>
-              <div className="flex items-center gap-3 pt-2">
-                <span className="text-xl sm:text-2xl lg:text-3xl font-semibold text-zinc-300">
-                  Software Web Developer & MERN Stack Developer
-                </span>
-              </div>
-            </motion.div>
+            <div className="flex items-center gap-2 text-2xl sm:text-3xl lg:text-4xl font-bold text-white min-h-[44px]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-orange-300 to-amber-400">
+                {displayText}
+              </span>
+              <span className="text-orange-500 font-normal animate-blink">|</span>
+            </div>
+          </div>
 
-            {/* Bio summary */}
-            <motion.p
-              variants={itemVariants}
-              className="text-base sm:text-lg text-zinc-400 max-w-xl leading-relaxed font-normal"
+          {/* Summary */}
+          <p className="text-zinc-300 text-sm sm:text-base leading-relaxed max-w-xl font-normal">
+            I build modern, scalable and innovative web applications with a passion for technology.
+          </p>
+
+          {/* Action Buttons */}
+          <div className="flex flex-wrap items-center gap-4 pt-1">
+            <a
+              href="#projects"
+              className="btn-orange-glow px-6 py-3 text-xs sm:text-sm font-semibold flex items-center gap-2"
             >
-              Passionate about architecting robust, scalable web systems and building high-performance digital products with modern engineering practices, clean code, and intuitive user experiences.
-            </motion.p>
+              <span>View My Projects</span>
+              <FiArrowRight className="w-4 h-4" />
+            </a>
 
-            {/* Quick Tech Stack Chips */}
-            <motion.div variants={itemVariants} className="space-y-2 pt-2">
-              <div className="text-xs font-mono text-zinc-400 uppercase tracking-wider">
-                // Core Tech Stack
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {techBadges.map((tech) => (
-                  <div
-                    key={tech.name}
-                    className="btn-neon-white flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-zinc-900/80 border border-white/10 text-xs font-mono text-zinc-300 hover:text-white transition-all shadow-sm cursor-default"
-                  >
-                    {tech.icon}
-                    <span>{tech.name}</span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Action Buttons with White Neon Glow */}
-            <motion.div
-              variants={itemVariants}
-              className="flex flex-wrap gap-3.5 pt-3"
+            <a
+              href="mailto:santhoshkumaroffc@gmail.com?subject=Resume%20Request%20-%20Santhosh%20Kumar"
+              className="btn-glass-pill px-5 py-3 text-xs sm:text-sm font-medium flex items-center gap-2"
             >
-              <a
-                href="#projects"
-                className="btn-neon-solid px-6 py-3 rounded-md font-mono text-xs font-semibold flex items-center gap-2"
+              <span>Download Resume</span>
+              <FiDownload className="w-4 h-4 text-zinc-400" />
+            </a>
+          </div>
+
+          {/* Quick Stats Badges Row */}
+          <div className="flex flex-wrap items-center gap-3 pt-3">
+            {stats.map((s, idx) => (
+              <div
+                key={idx}
+                className="flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-zinc-900/70 border border-white/[0.08] backdrop-blur-md text-xs font-mono"
               >
-                <FiCode className="w-4 h-4" />
-                <span>Explore Projects</span>
-              </a>
-              
-              <a
-                href="#contact"
-                className="btn-neon-white px-6 py-3 rounded-md bg-zinc-900 border border-white/15 text-zinc-200 hover:text-white font-mono text-xs font-medium flex items-center gap-2"
-              >
-                <FiTerminal className="w-4 h-4" />
-                <span>Contact Engineer</span>
-              </a>
-            </motion.div>
-          </motion.div>
-
-          {/* Right Column: Monochrome Code Editor */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="lg:col-span-5"
-          >
-            <div className="rounded-xl overflow-hidden bg-zinc-950 border border-white/10 shadow-2xl shadow-black hover:border-white/20 transition-all">
-              {/* Window Header */}
-              <div className="flex items-center justify-between px-4 py-3 bg-zinc-900/90 border-b border-white/[0.08]">
-                <div className="flex items-center gap-2">
-                  <div className="w-2.5 h-2.5 rounded-full bg-zinc-700" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-zinc-700" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-zinc-700" />
+                <div className="p-1 rounded-md bg-zinc-800/80">
+                  {s.icon}
                 </div>
-                
-                {/* File Tab */}
-                <div className="flex items-center gap-2 px-3 py-0.5 rounded bg-zinc-800 text-xs font-mono text-zinc-200 border border-white/10">
-                  <FiCode className="text-zinc-400" />
-                  <span>santhosh.ts</span>
-                </div>
-
-                <div className="text-[10px] font-mono text-zinc-400">TypeScript</div>
-              </div>
-
-              {/* Code Editor Body */}
-              <div className="p-5 font-mono text-xs sm:text-sm leading-relaxed overflow-x-auto text-zinc-300 bg-[#080808]">
-                <p className="text-zinc-400 italic mb-2">
-                  // Software Web Developer & MERN Stack Developer Profile
-                </p>
-                
-                <p>
-                  <span className="text-zinc-400">const</span>{' '}
-                  <span className="text-white">engineer</span>:{' '}
-                  <span className="text-zinc-300">Developer</span> = {'{'}
-                </p>
-                
-                <div className="pl-4 space-y-1 my-1">
-                  <p>
-                    <span className="text-zinc-400">name:</span>{' '}
-                    <span className="text-zinc-200">'Santhosh Kumar'</span>,
-                  </p>
-                  <p>
-                    <span className="text-zinc-400">role:</span>{' '}
-                    <span className="text-zinc-200">'Software Web Developer & MERN Stack Developer'</span>,
-                  </p>
-                  <p>
-                    <span className="text-zinc-400">status:</span>{' '}
-                    <span className="text-emerald-400">'Available for Roles'</span>,
-                  </p>
-                  <p>
-                    <span className="text-zinc-400">traits:</span> [
-                    <span className="text-zinc-300">'Clean Code'</span>,{' '}
-                    <span className="text-zinc-300">'Scalable Systems'</span>,{' '}
-                    <span className="text-zinc-300">'Problem Solver'</span>],
-                  </p>
-                  <p>
-                    <span className="text-zinc-400">passions:</span> [
-                    <span className="text-zinc-300">'Full Stack Dev'</span>,{' '}
-                    <span className="text-zinc-300">'Algorithms'</span>,{' '}
-                    <span className="text-zinc-300">'Cloud APIs'</span>],
-                  </p>
-                </div>
-                
-                <p className="text-zinc-300 mb-3">{'}'};</p>
-
-                <div className="border-t border-white/[0.08] pt-3 mt-3">
-                  <p className="text-zinc-400">function <span className="text-white">buildSystem</span>() {'{'}</p>
-                  <p className="pl-4 text-zinc-400">
-                    <span className="text-zinc-400">return</span> engineer.passions
-                  </p>
-                  <p className="pl-8 text-zinc-400">
-                    .<span className="text-zinc-200">map</span>(p =&gt; <span className="text-white">`🚀 Crafting ${'{'}p{'}'}`</span>);
-                  </p>
-                  <p className="text-zinc-300">{'}'}</p>
+                <div>
+                  <span className="text-white font-semibold">{s.label}</span>{' '}
+                  <span className="text-zinc-400 text-[11px]">{s.sub}</span>
                 </div>
               </div>
+            ))}
+          </div>
+        </motion.div>
 
-              {/* Terminal Footer Info Bar */}
-              <div className="px-4 py-2 bg-zinc-900/80 border-t border-white/[0.08] flex items-center justify-between text-[11px] font-mono text-zinc-400">
-                <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 animate-pulse" />
-                  <span>Ready • utf-8</span>
-                </div>
-                <div className="text-zinc-400">LF • Spaces: 2</div>
+        {/* Right Column: Cosmic Solar Eclipse Artwork with Silhouette & Handwriting */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="lg:col-span-5 relative flex items-center justify-center"
+        >
+          <div className="relative w-full max-w-md lg:max-w-none">
+            {/* Ambient Behind Glow */}
+            <div className="absolute -inset-4 bg-orange-500/20 rounded-3xl blur-2xl -z-10" />
+
+            {/* Artwork Container */}
+            <div className="relative rounded-2xl overflow-hidden border border-orange-500/30 shadow-[0_15px_40px_rgba(0,0,0,0.8),0_0_35px_rgba(255,107,0,0.25)] group">
+              <img
+                src="/images/hero_eclipse_hd.jpg"
+                alt="Santhosh Kumar - Cosmic Eclipse"
+                className="w-full aspect-[16/10] sm:aspect-[16/11] object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                loading="eager"
+              />
+
+              {/* Gradient Vignette overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#070709]/80 via-transparent to-black/30 pointer-events-none" />
+
+              {/* Hand-drawn Cursive Slogan Floating beside the figure */}
+              <div className="absolute top-4 right-4 sm:top-6 sm:right-6 pointer-events-none text-right">
+                <p className="font-handwriting text-3xl sm:text-4xl text-white/95 leading-tight select-none rotate-[-6deg] drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]">
+                  Code<br />
+                  <span className="text-orange-400 drop-shadow-[0_0_12px_rgba(255,107,0,0.8)]">Create</span><br />
+                  <span className="text-amber-200">Inspire</span>
+                </p>
+                <div className="w-16 h-0.5 bg-gradient-to-l from-orange-400 to-transparent ml-auto mt-1 rounded-full" />
               </div>
             </div>
-          </motion.div>
-
-        </div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="mt-16 text-center"
-        >
-          <a href="#about" className="inline-flex flex-col items-center gap-2 text-xs font-mono text-zinc-400 hover:text-white transition-colors">
-            <span>// scroll down</span>
-            <FiArrowDown className="text-sm text-zinc-400" />
-          </a>
+          </div>
         </motion.div>
       </div>
     </section>
